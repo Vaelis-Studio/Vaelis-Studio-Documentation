@@ -1,0 +1,37 @@
+<!--meta {"title": "Global API", "description": "Reference the global objects and functions available inside Vaelis scripts.", "lede": "Reference the global objects and functions available inside Vaelis scripts."} -->
+<h2 id="entity-lookup">Entity lookup</h2><div class="table-wrap"><table><thead><tr><th>API</th><th>Purpose</th></tr></thead><tbody><tr><td>findFirst(name)</td><td>First entity matching a name, or null.</td></tr><tr><td>findAll(name)</td><td>Every entity with a name, as an array.</td></tr><tr><td>findFirstWithTag(tag)</td><td>First entity with a tag, or null.</td></tr><tr><td>findAllWithTag(tag)</td><td>Every entity with a tag.</td></tr><tr><td>findWithTag(tag)</td><td>Alias for findAllWithTag().</td></tr><tr><td>findById(id)</td><td>Exact entity by stable ID, or null.</td></tr><tr><td>findInRadius(x,y,radius,opts)</td><td>Entities within radius, nearest first; optional name/tag filter.</td></tr></tbody></table></div><pre><code>function onUpdate() {
+  var target = findFirst("Target");
+  if (target) this.navMoveToward(target.x, target.y, 100);
+
+  var nearby = findInRadius(this.x, this.y, 150, { tag: "Enemy" });
+  debug.log("Enemies nearby", nearby.length);
+}</code></pre><h2 id="scene-physics-navigation-modules">Scene, physics &amp; navigation modules</h2><div class="table-wrap"><table><thead><tr><th>Module</th><th>Key members</th></tr></thead><tbody><tr><td>scene</td><td>current, load, restart, pause, resume, isPaused, lighting, find*</td></tr><tr><td>physics</td><td>raycast, layer</td></tr><tr><td>nav</td><td>findPath, isWalkable, bake, areaIndex, areaMask, areaCosts</td></tr></tbody></table></div><pre><code>function onTriggerEnter(other) {
+  if (other.name === "Target") scene.load("Level2");
+}
+
+function onUpdate() {
+  var hit = physics.raycast(this.x, this.y, this.x + 200, this.y);
+  if (hit) debug.log("Ray hit", hit.entity ? hit.entity.name : "wall");
+}</code></pre><h2 id="spawning-scheduling">Spawning &amp; scheduling</h2><div class="table-wrap"><table><thead><tr><th>API</th><th>Semantics</th></tr></thead><tbody><tr><td>spawn(nameOrTag, options)</td><td>Clone authored entity; supports direct entity contexts and byTag lookup.</td></tr><tr><td>wait(seconds, callback)</td><td>One-shot timer; returns a timer ID.</td></tr><tr><td>repeat(seconds, callback)</td><td>Recurring timer; returns a timer ID.</td></tr><tr><td>cancelWait(timerId)</td><td>Cancel one-shot timer.</td></tr><tr><td>cancelRepeat(timerId)</td><td>Cancel recurring timer.</td></tr></tbody></table></div><pre><code>function onStart() {
+  spawn("Enemy", { x: this.x + 100, y: this.y });
+
+  this._spawnTimer = repeat(2, function () {
+    spawn("Coin", { x: Math.random() * 400, y: 0 });
+  });
+}
+
+function onDestroy() {
+  cancelRepeat(this._spawnTimer);
+}</code></pre><h2 id="messaging">Messaging</h2><p><code>sendMessage(tagOrEntity, message, data)</code> can address every entity in a tag or one exact entity context. <code>broadcastMessage(message, data)</code> sends to all scene entities. Message handlers use the same script context model.</p><pre><code>// Sender:
+function onCollisionEnter(other) {
+  sendMessage("Enemy", "hit", { amount: 10 });
+}
+
+// Receiver (on any entity tagged "Enemy"):
+function onMessage(message, sender, data) {
+  if (message === "hit") this.hp -= data.amount;
+}</code></pre><h2 id="math-time">Math &amp; time</h2><p>Use <code>time.deltaTime</code> and <code>time.elapsed</code>; <code>random.int()</code>/<code>random.float()</code>; and the small <code>mathx</code> helpers <code>lerp</code>, <code>clamp</code>, <code>moveToward</code>, <code>remap</code> and <code>approximately</code>. Native JavaScript <code>Math</code> is also available.</p><pre><code>function onUpdate() {
+  this.x = mathx.moveToward(this.x, targetX, 200 * time.deltaTime);
+  this.rotation = mathx.lerp(this.rotation, 90, 0.1);
+  if (random.float() &lt; 0.01) spawn("Powerup", { x: this.x, y: this.y });
+}</code></pre>

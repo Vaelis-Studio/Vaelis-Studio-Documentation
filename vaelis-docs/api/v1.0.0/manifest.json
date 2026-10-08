@@ -1,0 +1,13 @@
+{
+ "title": "Vaelis 1.0.0 API catalog",
+ "engine": "Vaelis",
+ "version": "1.0.0",
+ "files": {
+  "catalog": "api/v1.0.0/index.json",
+  "searchIndex": "search-index.json",
+  "llms": "llms.txt",
+  "llmsFull": "llms-full.txt"
+ },
+ "componentCount": 25,
+ "pageCount": 79
+}

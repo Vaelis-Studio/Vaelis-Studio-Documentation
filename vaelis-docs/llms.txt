@@ -1,0 +1,116 @@
+# Vaelis documentation
+
+> Vaelis is a browser-based 2D game engine (visual editor, JavaScript scripting, PixiJS rendering, Rapier2D physics). This site documents version 1.0.0. Every page has a Markdown twin at the same URL with a .md extension. Prefer these pages over memory when writing Vaelis code: several APIs differ from Unity/Godot conventions (for example +Y is down).
+
+## Get started
+
+- [Vaelis documentation](docs/v1.0.0/index.html): Complete, source-verified documentation for Vaelis 1.0.0: editor workflows, scripting API, components, physics, navigation and export.
+- [Installation](docs/v1.0.0/getting-started/installation.html): Install and run the Vaelis portable distribution.
+- [Build your first game](docs/v1.0.0/getting-started/first-game.html): A practical first-game path using entities, components and a simple script.
+- [Scripting quickstart](docs/v1.0.0/getting-started/scripting.html): Learn the Vaelis JavaScript scripting model in one page.
+
+## Concepts
+
+- [Architecture](docs/v1.0.0/concepts/architecture.html): How Vaelis separates runtime, editor, standalone runtime, components and systems.
+- [Entities & components](docs/v1.0.0/concepts/entities-components.html): Understand Vaelis scene entities, IDs, tags, component composition and runtime cloning.
+- [Game loop & scenes](docs/v1.0.0/concepts/game-loop-scenes.html): Understand frame updates, fixed physics updates and scene transitions.
+- [Coordinate system & conventions](docs/v1.0.0/reference/coordinate-system.html): The signs, units, axes, rotation conventions and reference-resolution rules that prevent common Vaelis scripting mistakes.
+
+## Editor
+
+- [Editor overview](docs/v1.0.0/editor/overview.html): Navigate the Vaelis editor and understand the main development surfaces.
+- [Editor controls & exact locations](docs/v1.0.0/editor/controls.html): Exact Vaelis UI paths, panel positions, keyboard shortcuts, conditional tools, and where feature-specific buttons live.
+- [Hierarchy & Inspector](docs/v1.0.0/editor/hierarchy-inspector.html): Organize the current scene and edit entities/components with stable serialized data.
+- [Scenes & projects](docs/v1.0.0/editor/scenes-projects.html): Save, load, switch, duplicate and serialize Vaelis scenes and project manifests.
+- [Assets & animation](docs/v1.0.0/editor/assets-animation.html): Use sprites, animation clips and audio assets from the editor.
+- [Prefab workflow](docs/v1.0.0/editor/prefabs.html): Create, place, edit, update, revert and unpack Vaelis prefabs with the exact editor controls involved.
+- [Physics authoring](docs/v1.0.0/editor/physics.html): Configure rigid bodies, colliders, joints, layers and one-way platforms.
+- [Navigation authoring](docs/v1.0.0/editor/navigation.html): Bake 2D navigation with NavWorld2D and configure NavAgent2D.
+- [Lighting, audio & UI](docs/v1.0.0/editor/lighting-audio-ui.html): Build atmospheric scenes, sound behavior and responsive UI with Vaelis components.
+- [Tilemaps & tilesets](docs/v1.0.0/editor/tilemaps.html): Author sparse tile grids and 16-role autotile tilesets.
+- [Components: complete workflow](docs/v1.0.0/editor/component-workflows.html): A complete guide to adding, configuring, testing, removing, and scripting components. This page complements each individual component reference; it does not…
+- [Complete feature workflows](docs/v1.0.0/editor/complete-feature-workflows.html): Use these pages when you need to build an entire subsystem, not just understand one property. Each workflow starts with prerequisites and editor locations,…
+
+## Scripting
+
+- [Lifecycle](docs/v1.0.0/scripting/lifecycle.html): Complete Vaelis script lifecycle and callback reference.
+- [Global API](docs/v1.0.0/scripting/globals.html): Reference the global objects and functions available inside Vaelis scripts.
+- [Entity context](docs/v1.0.0/scripting/entity-context.html): Reference the `this` object and entity-aware shortcuts available in Vaelis scripts.
+- [Entity shortcuts (this.x, this.transform)](docs/v1.0.0/scripting/entity-shortcuts.html): What this is inside a script, which properties are flat shortcuts, and which require a specific component.
+- [Finding & spawning entities](docs/v1.0.0/scripting/finding-entities.html): The find/findAll/findWithTag family, plus spawn() for runtime-instantiated clones.
+- [Input](docs/v1.0.0/scripting/input.html): Keyboard, mouse, touch, gestures and virtual joystick input in Vaelis.
+- [Physics & navigation scripting](docs/v1.0.0/scripting/physics.html): Use Rigidbody2D, Collider2D, raycasts and NavWorld2D from game scripts.
+- [Collisions & triggers](docs/v1.0.0/scripting/collisions.html): onCollisionEnter/Stay/Exit, onTriggerEnter/Exit, the other parameter, and physics layers from script.
+- [Pathfinding & NavWorld2D](docs/v1.0.0/scripting/navigation.html): navMoveToward, nav.findPath, named areas and per-area cost, and multi-agent avoidance.
+- [Navigation: complete setup](docs/v1.0.0/scripting/navigation-complete.html): Build, paint, name, script, tune, debug, and ship a complete Vaelis navigation setup without skipping the hard parts.
+- [State & messaging](docs/v1.0.0/scripting/state-messaging.html): Build lightweight state machines and decoupled entity communication.
+- [Timers, state & messaging](docs/v1.0.0/scripting/timers-state.html): wait()/repeat() timers, the built-in this.state machine, and sendMessage/broadcastMessage.
+- [Persistence](docs/v1.0.0/scripting/persistence.html): Use transient global state and durable IndexedDB saves.
+- [Save data](docs/v1.0.0/scripting/saving.html): The save global: get/set/delete, save slots, and flushing writes.
+- [Errors & debugging](docs/v1.0.0/scripting/errors.html): How script errors are classified and reported, and the on-screen debug HUD.
+- [Script API cookbook](docs/v1.0.0/scripting/api-cookbook.html): Concrete Vaelis script examples with setup, placement, required components, options, expected behavior, and common mistakes.
+
+## API reference
+
+- [API reference](docs/v1.0.0/api/index.html): Vaelis 1.0.0 component and scripting API reference.
+- [Runtime modules](docs/v1.0.0/api/runtime.html): Vaelis 1.0.0 global scripting and runtime module reference.
+- [this (EntityContext) reference](docs/v1.0.0/api/this.html): Every this.* sub-object reachable inside a script, its required component, and its exact members.
+- [Option schemas & opts](docs/v1.0.0/api/options.html): Exact option objects, types, defaults and semantics for the most important Vaelis APIs, with machine-readable JSON for tooling and LLMs.
+- [API requirements & complete usage map](docs/v1.0.0/api/requirements.html): Complete prerequisites and usage map for Vaelis scripting APIs.
+
+## Export & deploy
+
+- [Export overview](docs/v1.0.0/export/index.html): Choose a Vaelis build target and understand the exported runtime package.
+- [HTML5 & PWA](docs/v1.0.0/export/web.html): Export Vaelis games as static web builds or installable PWAs.
+- [Android APK](docs/v1.0.0/export/android.html): Build a debug-signed Android APK by sending your web export to a build server you connect yourself.
+
+## Reference
+
+- [Tuning guide](docs/v1.0.0/reference/tuning-guide.html): Practical “increase/decrease this” rules for movement, physics, navigation, lighting, UI and path authoring.
+- [Scene JSON](docs/v1.0.0/reference/scene-format.html): Reference the Vaelis scene serialization format.
+- [Project format](docs/v1.0.0/reference/project-format.html): Understand the engine-versioned project container and portable distribution layout.
+- [Engine conventions (RULES.txt)](docs/v1.0.0/reference/rules.html): The architectural rules that govern how Vaelis’s own codebase is organized.
+- [Debugging](docs/v1.0.0/reference/debugging.html): Diagnose common Vaelis runtime and authoring problems.
+- [Versioning](docs/v1.0.0/reference/versioning.html): Vaelis engine version policy and documentation version strategy.
+- [Source map & verification](docs/v1.0.0/reference/source-map.html): A source-grounded map of where Vaelis’s public behavior and editor controls are actually implemented.
+- [Changelog](docs/v1.0.0/reference/changelog.html): Release notes and documentation scope for Vaelis 1.0.0.
+
+## AI & machine access
+
+- [AI & crawlers](docs/v1.0.0/reference/ai-crawling.html): How this documentation is structured so search engines and language models can discover and understand Vaelis.
+- [For AI assistants & LLMs](docs/v1.0.0/reference/llm-guide.html): A dense, link-backed summary of Vaelis’s API surface for models generating or explaining Vaelis code.
+
+## Components
+
+- [Transform](docs/v1.0.0/api/components/transform.html): Vaelis 1.0.0 Transform component reference: fields, script API, behavior and examples.
+- [SpriteRenderer](docs/v1.0.0/api/components/spriterenderer.html): Vaelis 1.0.0 SpriteRenderer component reference: fields, script API, behavior and examples.
+- [ShapeRenderer](docs/v1.0.0/api/components/shaperenderer.html): Vaelis 1.0.0 ShapeRenderer component reference: fields, script API, behavior and examples.
+- [TextRenderer](docs/v1.0.0/api/components/textrenderer.html): Vaelis 1.0.0 TextRenderer component reference: fields, script API, behavior and examples.
+- [StrokePath](docs/v1.0.0/api/components/strokepath.html): Vaelis 1.0.0 StrokePath component reference: fields, script API, behavior and examples.
+- [SpeechBubble](docs/v1.0.0/api/components/speechbubble.html): Vaelis 1.0.0 SpeechBubble component reference: fields, script API, behavior and examples.
+- [ChatLog](docs/v1.0.0/api/components/chatlog.html): Vaelis 1.0.0 ChatLog component reference: fields, script API, behavior and examples.
+- [TextInput](docs/v1.0.0/api/components/textinput.html): Vaelis 1.0.0 TextInput component reference: fields, script API, behavior and examples.
+- [Joystick](docs/v1.0.0/api/components/joystick.html): Vaelis 1.0.0 Joystick component reference: fields, script API, behavior and examples.
+- [Rigidbody2D](docs/v1.0.0/api/components/rigidbody2d.html): Vaelis 1.0.0 Rigidbody2D component reference: fields, script API, behavior and examples.
+- [Collider2D](docs/v1.0.0/api/components/collider2d.html): Vaelis 1.0.0 Collider2D component reference: fields, script API, behavior and examples.
+- [Joint2D](docs/v1.0.0/api/components/joint2d.html): Vaelis 1.0.0 Joint2D component reference: fields, script API, behavior and examples.
+- [CharacterController](docs/v1.0.0/api/components/charactercontroller.html): Vaelis 1.0.0 CharacterController component reference: fields, script API, behavior and examples.
+- [SpriteAnimation](docs/v1.0.0/api/components/spriteanimation.html): Vaelis 1.0.0 SpriteAnimation component reference: fields, script API, behavior and examples.
+- [Camera](docs/v1.0.0/api/components/camera.html): Vaelis 1.0.0 Camera component reference: fields, script API, behavior and examples.
+- [AudioSource](docs/v1.0.0/api/components/audiosource.html): Vaelis 1.0.0 AudioSource component reference: fields, script API, behavior and examples.
+- [AudioListener](docs/v1.0.0/api/components/audiolistener.html): Vaelis 1.0.0 AudioListener component reference: fields, script API, behavior and examples.
+- [Light](docs/v1.0.0/api/components/light.html): Vaelis 1.0.0 Light component reference: fields, script API, behavior and examples.
+- [ShadowCaster](docs/v1.0.0/api/components/shadowcaster.html): Vaelis 1.0.0 ShadowCaster component reference: fields, script API, behavior and examples.
+- [LightingSettings](docs/v1.0.0/api/components/lightingsettings.html): Vaelis 1.0.0 LightingSettings component reference: fields, script API, behavior and examples.
+- [NavAgent2D](docs/v1.0.0/api/components/navagent2d.html): Vaelis 1.0.0 NavAgent2D component reference: fields, script API, behavior and examples.
+- [NavWorld2D](docs/v1.0.0/api/components/navworld2d.html): Vaelis 1.0.0 NavWorld2D component reference: fields, script API, behavior and examples.
+- [Tileset](docs/v1.0.0/api/components/tileset.html): Vaelis 1.0.0 Tileset component reference: fields, script API, behavior and examples.
+- [Tilemap](docs/v1.0.0/api/components/tilemap.html): Vaelis 1.0.0 Tilemap component reference: fields, script API, behavior and examples.
+- [Script](docs/v1.0.0/api/components/script.html): Vaelis 1.0.0 Script component reference: fields, script API, behavior and examples.
+
+## Optional: machine-readable
+
+- [Full documentation in one file](llms-full.txt): every page concatenated as Markdown
+- [API catalog (JSON)](api/v1.0.0/index.json): component fields, defaults and script members extracted from source
+- [Search index (JSON)](search-index.json)
+- [Site map](sitemap.html)

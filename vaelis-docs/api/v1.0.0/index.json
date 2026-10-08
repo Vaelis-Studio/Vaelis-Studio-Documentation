@@ -1,0 +1,3579 @@
+{
+ "engine": "Vaelis",
+ "version": "1.0.0",
+ "generatedFrom": "project/runtime/components/*.js and project/runtime/scripting/components/*API.js",
+ "runtimeEntry": "project/runtime/index.js",
+ "componentTypes": [
+  "Transform",
+  "SpriteRenderer",
+  "ShapeRenderer",
+  "TextRenderer",
+  "StrokePath",
+  "SpeechBubble",
+  "ChatLog",
+  "TextInput",
+  "Joystick",
+  "Rigidbody2D",
+  "Collider2D",
+  "Joint2D",
+  "CharacterController",
+  "SpriteAnimation",
+  "Camera",
+  "AudioSource",
+  "AudioListener",
+  "Light",
+  "ShadowCaster",
+  "LightingSettings",
+  "NavAgent2D",
+  "NavWorld2D",
+  "Tileset",
+  "Tilemap",
+  "Script"
+ ],
+ "lifecycle": [
+  "onClone",
+  "onStart",
+  "onUpdate",
+  "onFixedUpdate",
+  "onDestroy",
+  "onClick",
+  "onCollision",
+  "onCollisionEnter",
+  "onCollisionStay",
+  "onCollisionExit",
+  "onTriggerEnter",
+  "onTriggerExit",
+  "onMessage",
+  "onStateEnter",
+  "onStateExit",
+  "onStateUpdate",
+  "onHearSound",
+  "onLoseSound"
+ ],
+ "enums": {
+  "ShapeType": {
+   "SQUARE": "Square",
+   "CIRCLE": "Circle",
+   "TRIANGLE": "Triangle",
+   "CAPSULE": "Capsule"
+  },
+  "JointType2D": {
+   "FIXED": "Fixed",
+   "REVOLUTE": "Revolute",
+   "PRISMATIC": "Prismatic",
+   "ROPE": "Rope",
+   "SPRING": "Spring"
+  },
+  "ColliderShape": {
+   "BOX": "Box",
+   "CIRCLE": "Circle",
+   "CAPSULE": "Capsule",
+   "TRIANGLE": "Triangle"
+  },
+  "TileRole": {
+   "CORNER_TL": "cornerTL",
+   "EDGE_T": "edgeT",
+   "CORNER_TR": "cornerTR",
+   "EDGE_L": "edgeL",
+   "CENTER": "center",
+   "EDGE_R": "edgeR",
+   "CORNER_BL": "cornerBL",
+   "EDGE_B": "edgeB",
+   "CORNER_BR": "cornerBR",
+   "STUB_T": "stubT",
+   "LINE_V": "lineV",
+   "STUB_B": "stubB",
+   "STUB_L": "stubL",
+   "LINE_H": "lineH",
+   "STUB_R": "stubR",
+   "SINGLE": "single"
+  },
+  "ControllerType": {
+   "CHARACTER": "Character Controller",
+   "PLATFORMER": "Platformer",
+   "TOP_DOWN": "Top-Down",
+   "CAR": "Car",
+   "FOLLOW": "Follow",
+   "PATROL": "Patrol",
+   "FREE": "Free"
+  },
+  "PatrolMode": {
+   "PLATFORMER": "Platformer",
+   "TOP_DOWN": "Top-Down"
+  },
+  "PatrolAxis": {
+   "HORIZONTAL": "Horizontal",
+   "VERTICAL": "Vertical"
+  },
+  "BodyType": {
+   "DYNAMIC": "Dynamic",
+   "KINEMATIC": "Kinematic",
+   "STATIC": "Static"
+  },
+  "StrokePathTextureMode": {
+   "STRETCH": "stretch",
+   "TILE": "tile"
+  },
+  "StrokePathJointMode": {
+   "SHARP": "sharp",
+   "BEVEL": "bevel",
+   "ROUND": "round"
+  },
+  "StrokePathCapMode": {
+   "NONE": "none",
+   "BOX": "box",
+   "ROUND": "round"
+  },
+  "CameraAspectMode": {
+   "LANDSCAPE": "Landscape",
+   "PORTRAIT": "Portrait",
+   "SQUARE": "Square",
+   "CUSTOM": "Custom"
+  },
+  "ScalingMode": {
+   "EXPAND": "Expand",
+   "FIT": "Fit",
+   "FILL": "Fill",
+   "STRETCH": "Stretch"
+  },
+  "LightType": {
+   "DIRECTIONAL": "Directional",
+   "POINT": "Point",
+   "SPOT": "Spot",
+   "AREA": "Area",
+   "GOD_RAYS": "GodRays",
+   "FREEFORM": "Freeform"
+  },
+  "JoystickPositionMode": {
+   "FIXED": "Fixed",
+   "DYNAMIC": "Dynamic"
+  },
+  "ShadowMode": {
+   "QUAD": "quad",
+   "RAYMARCH": "raymarch"
+  }
+ },
+ "components": {
+  "Transform": {
+   "summary": "Position, rotation and scale. Every spatial entity uses a Transform.",
+   "docs": "docs/v1.0.0/api/components/transform.html",
+   "source": "project/runtime/components/Transform.js",
+   "sceneFields": [
+    {
+     "name": "x",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "y",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "z",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "rotation",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "scaleX",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "scaleY",
+     "default": "1",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.transform",
+   "scriptMembers": [
+    {
+     "name": "lookAt",
+     "kind": "method",
+     "doc": ""
+    },
+    {
+     "name": "position",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "rotation",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "scale",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "translate",
+     "kind": "method",
+     "doc": ""
+    }
+   ]
+  },
+  "SpriteRenderer": {
+   "summary": "Draw a 2D texture sprite for an entity.",
+   "docs": "docs/v1.0.0/api/components/spriterenderer.html",
+   "source": "project/runtime/components/SpriteRenderer.js",
+   "sceneFields": [
+    {
+     "name": "spriteKey",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "color",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "opacity",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "flipX",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "flipY",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "referenceWidth",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "referenceHeight",
+     "default": "null",
+     "type": "null"
+    }
+   ],
+   "scriptModule": "this.sprite",
+   "scriptMembers": [
+    {
+     "name": "opacity",
+     "kind": "property",
+     "doc": "runtime/scripting/components/SpriteAPI.js The `this.sprite` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header comment…"
+    }
+   ]
+  },
+  "ShapeRenderer": {
+   "summary": "Draw a procedural 2D shape without requiring a sprite asset.",
+   "docs": "docs/v1.0.0/api/components/shaperenderer.html",
+   "source": "project/runtime/components/ShapeRenderer.js",
+   "sceneFields": [
+    {
+     "name": "shapeType",
+     "default": "Square",
+     "type": "enum:ShapeType"
+    },
+    {
+     "name": "width",
+     "default": "100",
+     "type": "number"
+    },
+    {
+     "name": "height",
+     "default": "100",
+     "type": "number"
+    },
+    {
+     "name": "radius",
+     "default": "50",
+     "type": "number"
+    },
+    {
+     "name": "capsuleHalfHeight",
+     "default": "50",
+     "type": "number"
+    },
+    {
+     "name": "capsuleRadius",
+     "default": "30",
+     "type": "number"
+    },
+    {
+     "name": "trianglePoints",
+     "default": "[ { x: -50, y: 50 }, { x: 50, y: 50 }, { x: 0, y: -50 }, ]",
+     "type": "array"
+    },
+    {
+     "name": "fillColor",
+     "default": "#3a8ede",
+     "type": "string"
+    },
+    {
+     "name": "opacity",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "outlineEnabled",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "outlineColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "outlineWidth",
+     "default": "2",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.shape",
+   "scriptMembers": [
+    {
+     "name": "capsuleHalfHeight",
+     "kind": "property",
+     "doc": "Capsule half-height (principal axis is Y — a vertical pill)."
+    },
+    {
+     "name": "capsuleRadius",
+     "kind": "property",
+     "doc": "Capsule radius."
+    },
+    {
+     "name": "fillColor",
+     "kind": "property",
+     "doc": "Fill color as hex string, e.g. \"#3a8ede\"."
+    },
+    {
+     "name": "height",
+     "kind": "property",
+     "doc": "Square height in world units."
+    },
+    {
+     "name": "opacity",
+     "kind": "property",
+     "doc": "0.0-1.0 transparency."
+    },
+    {
+     "name": "outlineColor",
+     "kind": "property",
+     "doc": "Outline stroke color as hex string."
+    },
+    {
+     "name": "outlineEnabled",
+     "kind": "property",
+     "doc": "Whether the outline stroke is drawn around the shape."
+    },
+    {
+     "name": "outlineWidth",
+     "kind": "property",
+     "doc": "Outline stroke width in px."
+    },
+    {
+     "name": "radius",
+     "kind": "property",
+     "doc": "Circle radius in world units."
+    },
+    {
+     "name": "shapeType",
+     "kind": "property",
+     "doc": "runtime/scripting/components/ShapeAPI.js The `this.shape` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header comment for…"
+    },
+    {
+     "name": "width",
+     "kind": "property",
+     "doc": "Square width in world units."
+    }
+   ]
+  },
+  "TextRenderer": {
+   "summary": "Render text either in world space or as screen-space UI.",
+   "docs": "docs/v1.0.0/api/components/textrenderer.html",
+   "source": "project/runtime/components/TextRenderer.js",
+   "sceneFields": [
+    {
+     "name": "value",
+     "default": "Text",
+     "type": "string"
+    },
+    {
+     "name": "fontSize",
+     "default": "32",
+     "type": "number"
+    },
+    {
+     "name": "color",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "fontFamily",
+     "default": "Arial",
+     "type": "string"
+    },
+    {
+     "name": "bold",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "italic",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "align",
+     "default": "left",
+     "type": "string"
+    },
+    {
+     "name": "anchorX",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "anchorY",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "opacity",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "screenSpace",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "wordWrap",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "wrapWidth",
+     "default": "300",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.text",
+   "scriptMembers": [
+    {
+     "name": "align",
+     "kind": "property",
+     "doc": "\"left\" | \"center\" | \"right\" — multi-line text alignment."
+    },
+    {
+     "name": "anchorX",
+     "kind": "property",
+     "doc": "0–1 — this text's own pivot point (0.5 = centered on this.x/this.y)."
+    },
+    {
+     "name": "anchorY",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "bold",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "color",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "fontFamily",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "fontSize",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "italic",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "opacity",
+     "kind": "property",
+     "doc": "0.0–1.0 transparency, same convention as this.sprite.opacity."
+    },
+    {
+     "name": "screenSpace",
+     "kind": "property",
+     "doc": "true = fixed screen-space UI label (this.x/this.y are raw screen pixels, never moves with the camera). false = world-space, pans/ zooms with the Main Camera like a sprite. See TextRenderer.js."
+    },
+    {
+     "name": "value",
+     "kind": "property",
+     "doc": "runtime/scripting/components/TextAPI.js The `this.text` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header comment for…"
+    },
+    {
+     "name": "wordWrap",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "wrapWidth",
+     "kind": "property",
+     "doc": "Px width the text wraps at — only takes effect while wordWrap is true."
+    }
+   ]
+  },
+  "StrokePath": {
+   "summary": "A variable-thickness strip along placed points — rivers, cables, roads, conveyor belts or walls — with flat color or textured fill.",
+   "docs": "docs/v1.0.0/api/components/strokepath.html",
+   "source": "project/runtime/components/StrokePath.js",
+   "sceneFields": [
+    {
+     "name": "points",
+     "default": "[ { x: -100, y: 0 }, { x: 100, y: 0 }, ]",
+     "type": "array"
+    },
+    {
+     "name": "thickness",
+     "default": "40",
+     "type": "number"
+    },
+    {
+     "name": "color",
+     "default": "#8a8a8a",
+     "type": "string"
+    },
+    {
+     "name": "opacity",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "useTexture",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "textureKey",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "textureMode",
+     "default": "stretch",
+     "type": "enum:StrokePathTextureMode"
+    },
+    {
+     "name": "textureTiling",
+     "default": "100",
+     "type": "number"
+    },
+    {
+     "name": "textureScale",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "textureOffset",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "textureFlip",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "textureRotation",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "jointMode",
+     "default": "round",
+     "type": "enum:StrokePathJointMode"
+    },
+    {
+     "name": "capMode",
+     "default": "round",
+     "type": "enum:StrokePathCapMode"
+    },
+    {
+     "name": "smoothing",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.strokePath",
+   "scriptMembers": [
+    {
+     "name": "addPoint",
+     "kind": "method",
+     "doc": "Appends a new point (x, y) to the end of the path."
+    },
+    {
+     "name": "capMode",
+     "kind": "property",
+     "doc": "'none' | 'box' | 'round' — see StrokePathCapMode in components/StrokePath.js. Applies to both ends."
+    },
+    {
+     "name": "color",
+     "kind": "property",
+     "doc": "Flat fill color as a hex string, e.g. \"#8a8a8a\". Ignored when useTexture is true."
+    },
+    {
+     "name": "firstPoint",
+     "kind": "read-only property",
+     "doc": "{ x, y } of the path's first point (read-only shortcut for this.strokePath.getPoint(0)) — handy for spawning a new point just before the current start, e.g. extending a path backward."
+    },
+    {
+     "name": "insertPoint",
+     "kind": "method",
+     "doc": "Inserts a new point (x, y) at `index`, shifting every point from `index` onward one slot later — same \"insert a point mid-path\" gesture as clicking a segment with the Path tool in the editor (see…"
+    },
+    {
+     "name": "jointMode",
+     "kind": "property",
+     "doc": "'sharp' | 'bevel' | 'round' — see StrokePathJointMode in components/StrokePath.js."
+    },
+    {
+     "name": "lastPoint",
+     "kind": "read-only property",
+     "doc": "{ x, y } of the path's last point (read-only shortcut for this.strokePath.getPoint(this.strokePath.pointCount - 1)) — handy for spawning a new point just ahead of the current end, e.g.…"
+    },
+    {
+     "name": "localToWorld",
+     "kind": "method",
+     "doc": "The inverse of worldToLocal() above — converts one of this entity's own LOCAL-space path points (or any local x/y) into WORLD space, e.g. to compare a path point against mouse.x/ mouse.y, or to spawn…"
+    },
+    {
+     "name": "opacity",
+     "kind": "property",
+     "doc": "Overall strip opacity, 0-1. Clamped to [0, 1]."
+    },
+    {
+     "name": "pointCount",
+     "kind": "read-only property",
+     "doc": "Number of centerline points currently on the path (read-only)."
+    },
+    {
+     "name": "points",
+     "kind": "property",
+     "doc": "runtime/scripting/components/StrokePathAPI.js The `this.strokePath` sub-object exposed to user scripts on any entity that has a StrokePath component. Lets scripts read the strip's current…"
+    },
+    {
+     "name": "removePoint",
+     "kind": "method",
+     "doc": "Removes the point at `index`. Refuses to drop the path below 2 points (a StrokePath needs at least 2 to have any strip to draw — see StrokePathGeometry.js's buildStrokePathPolygon), silently…"
+    },
+    {
+     "name": "textureFlip",
+     "kind": "property",
+     "doc": "Mirrors the texture across the path's own centerline."
+    },
+    {
+     "name": "textureKey",
+     "kind": "property",
+     "doc": "Logical sprite/texture asset key painted along the strip when useTexture is true."
+    },
+    {
+     "name": "textureMode",
+     "kind": "property",
+     "doc": "'stretch' | 'tile' — see StrokePathTextureMode in components/StrokePath.js."
+    },
+    {
+     "name": "textureOffset",
+     "kind": "property",
+     "doc": "World-unit shift applied along the path before texture mapping — animate this over time for a flowing-river/conveyor-belt/marching- dashes look without moving any point."
+    },
+    {
+     "name": "textureRotation",
+     "kind": "property",
+     "doc": "Texture rotation in degrees, around each tile's own center."
+    },
+    {
+     "name": "textureScale",
+     "kind": "property",
+     "doc": "How many times the texture repeats ACROSS the strip's own thickness. 1 = no repeat."
+    },
+    {
+     "name": "textureTiling",
+     "kind": "property",
+     "doc": "TILE mode only: world units of path length one full texture tile covers lengthwise."
+    },
+    {
+     "name": "thickness",
+     "kind": "property",
+     "doc": "Full strip width (not half-width), world units. Clamped to >= 0."
+    },
+    {
+     "name": "useTexture",
+     "kind": "property",
+     "doc": "When true, the strip is filled with textureKey's image instead of the flat color."
+    },
+    {
+     "name": "worldToLocal",
+     "kind": "method",
+     "doc": "Converts a WORLD-space (x, y) — e.g. mouse.x/mouse.y, or another entity's this.transform.x/y — into this entity's LOCAL space, the same space this.strokePath.points/addPoint/setPoint/insertPoint all…"
+    }
+   ]
+  },
+  "SpeechBubble": {
+   "summary": "Speech bubble UI attached to an entity, useful for dialogue and NPC callouts.",
+   "docs": "docs/v1.0.0/api/components/speechbubble.html",
+   "source": "project/runtime/components/SpeechBubble.js",
+   "sceneFields": [
+    {
+     "name": "text",
+     "default": "Hello!",
+     "type": "string"
+    },
+    {
+     "name": "visible",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "backgroundColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "textColor",
+     "default": "#111111",
+     "type": "string"
+    },
+    {
+     "name": "borderColor",
+     "default": "#111111",
+     "type": "string"
+    },
+    {
+     "name": "borderWidth",
+     "default": "2",
+     "type": "number"
+    },
+    {
+     "name": "fontSize",
+     "default": "20",
+     "type": "number"
+    },
+    {
+     "name": "fontFamily",
+     "default": "Arial",
+     "type": "string"
+    },
+    {
+     "name": "padding",
+     "default": "12",
+     "type": "number"
+    },
+    {
+     "name": "cornerRadius",
+     "default": "10",
+     "type": "number"
+    },
+    {
+     "name": "maxWidth",
+     "default": "220",
+     "type": "number"
+    },
+    {
+     "name": "offsetX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "offsetY",
+     "default": "-60",
+     "type": "number"
+    },
+    {
+     "name": "tailDirection",
+     "default": "down",
+     "type": "string"
+    },
+    {
+     "name": "tailSize",
+     "default": "14",
+     "type": "number"
+    },
+    {
+     "name": "hideTimer",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.speechBubble",
+   "scriptMembers": [
+    {
+     "name": "backgroundColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "borderColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "borderWidth",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "cornerRadius",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "fontFamily",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "fontSize",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "hide",
+     "kind": "method",
+     "doc": "Hides the bubble immediately."
+    },
+    {
+     "name": "maxWidth",
+     "kind": "property",
+     "doc": "Px width the text wraps at."
+    },
+    {
+     "name": "offsetX",
+     "kind": "property",
+     "doc": "Px offset from this entity's own position — where the bubble sits."
+    },
+    {
+     "name": "offsetY",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "padding",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "show",
+     "kind": "method",
+     "doc": "Shows the bubble with this text. Pass a duration (seconds) to auto-hide after that long — omit it (or pass 0) to leave the bubble showing until you call hide() yourself: this.speechBubble.show(\"Watch…"
+    },
+    {
+     "name": "tailDirection",
+     "kind": "property",
+     "doc": "\"down\" | \"up\" | \"left\" | \"right\" | \"none\" — which edge the little pointer sits on."
+    },
+    {
+     "name": "tailSize",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "text",
+     "kind": "property",
+     "doc": "runtime/scripting/components/SpeechBubbleAPI.js The `this.speechBubble` sub-object exposed to user scripts (see scripting/ScriptAPI.js). Mirrors TextAPI.js's structure/Proxy pattern closely, plus two…"
+    },
+    {
+     "name": "textColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "visible",
+     "kind": "property",
+     "doc": "Whether the bubble is currently shown (read/write)."
+    }
+   ]
+  },
+  "ChatLog": {
+   "summary": "Scrollable-style conversation log component for UI dialogue.",
+   "docs": "docs/v1.0.0/api/components/chatlog.html",
+   "source": "project/runtime/components/ChatLog.js",
+   "sceneFields": [
+    {
+     "name": "messages",
+     "default": "[]",
+     "type": "array"
+    },
+    {
+     "name": "maxMessages",
+     "default": "50",
+     "type": "number"
+    },
+    {
+     "name": "visibleCount",
+     "default": "6",
+     "type": "number"
+    },
+    {
+     "name": "width",
+     "default": "320",
+     "type": "number"
+    },
+    {
+     "name": "lineHeight",
+     "default": "26",
+     "type": "number"
+    },
+    {
+     "name": "fontSize",
+     "default": "16",
+     "type": "number"
+    },
+    {
+     "name": "fontFamily",
+     "default": "Arial",
+     "type": "string"
+    },
+    {
+     "name": "messageColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "senderColor",
+     "default": "#ffd700",
+     "type": "string"
+    },
+    {
+     "name": "backgroundColor",
+     "default": "#000000",
+     "type": "string"
+    },
+    {
+     "name": "backgroundOpacity",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "padding",
+     "default": "10",
+     "type": "number"
+    },
+    {
+     "name": "showSender",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "screenSpace",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "visible",
+     "default": "true",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": "this.chat",
+   "scriptMembers": [
+    {
+     "name": "backgroundColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "backgroundOpacity",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "clear",
+     "kind": "method",
+     "doc": "Empties the whole message history."
+    },
+    {
+     "name": "fontFamily",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "fontSize",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "lineHeight",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "maxMessages",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "messageColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "messages",
+     "kind": "read-only property",
+     "doc": "runtime/scripting/components/ChatLogAPI.js The `this.chat` sub-object exposed to user scripts (see scripting/ScriptAPI.js). Mirrors TextAPI.js/SpeechBubbleAPI.js's Proxy pattern, plus send()/clear()…"
+    },
+    {
+     "name": "padding",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "screenSpace",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "send",
+     "kind": "method",
+     "doc": "Appends a message to the log — the normal way to use this: this.chat.send(\"Alex\", \"hey, you online?\"); this.chat.send(\"Guard\", \"Halt! Who goes there?\", \"#ff6666\"); // custom color for this message…"
+    },
+    {
+     "name": "senderColor",
+     "kind": "property",
+     "doc": "Default sender-name color used when send() isn't given its own color."
+    },
+    {
+     "name": "showSender",
+     "kind": "property",
+     "doc": "false = just the message text, no \"Name: \" prefix."
+    },
+    {
+     "name": "visible",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "visibleCount",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "width",
+     "kind": "property",
+     "doc": ""
+    }
+   ]
+  },
+  "TextInput": {
+   "summary": "Interactive text input control driven by the runtime UI system.",
+   "docs": "docs/v1.0.0/api/components/textinput.html",
+   "source": "project/runtime/components/TextInput.js",
+   "sceneFields": [
+    {
+     "name": "value",
+     "default": "",
+     "type": "string"
+    },
+    {
+     "name": "placeholder",
+     "default": "Type a message...",
+     "type": "string"
+    },
+    {
+     "name": "maxLength",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "fontSize",
+     "default": "18",
+     "type": "number"
+    },
+    {
+     "name": "fontFamily",
+     "default": "Arial",
+     "type": "string"
+    },
+    {
+     "name": "textColor",
+     "default": "#111111",
+     "type": "string"
+    },
+    {
+     "name": "placeholderColor",
+     "default": "#999999",
+     "type": "string"
+    },
+    {
+     "name": "backgroundColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "borderColor",
+     "default": "#888888",
+     "type": "string"
+    },
+    {
+     "name": "borderWidth",
+     "default": "2",
+     "type": "number"
+    },
+    {
+     "name": "cornerRadius",
+     "default": "8",
+     "type": "number"
+    },
+    {
+     "name": "width",
+     "default": "260",
+     "type": "number"
+    },
+    {
+     "name": "height",
+     "default": "40",
+     "type": "number"
+    },
+    {
+     "name": "padding",
+     "default": "10",
+     "type": "number"
+    },
+    {
+     "name": "clearOnSubmit",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "focused",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "justSubmitted",
+     "default": "false",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": "this.textInput",
+   "scriptMembers": [
+    {
+     "name": "backgroundColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "borderColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "borderWidth",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "clear",
+     "kind": "method",
+     "doc": "Empties the field immediately (equivalent to clearOnSubmit's automatic behavior, callable any time)."
+    },
+    {
+     "name": "clearOnSubmit",
+     "kind": "property",
+     "doc": "true = the field empties itself automatically right after Enter (typical chat-box behavior). false = value stays after submit."
+    },
+    {
+     "name": "cornerRadius",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "focused",
+     "kind": "read-only property",
+     "doc": "True while the player is actively typing into this field (read-only — driven by real focus/blur on the underlying input, not something a script sets directly; mobile browsers block programmatic focus…"
+    },
+    {
+     "name": "fontFamily",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "fontSize",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "height",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "justSubmitted",
+     "kind": "read-only property",
+     "doc": "True for exactly one frame right after the player presses Enter — read this.textInput.value in the SAME frame to see what they typed (read-only)."
+    },
+    {
+     "name": "maxLength",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "padding",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "placeholder",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "placeholderColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "textColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "value",
+     "kind": "property",
+     "doc": "runtime/scripting/components/TextInputAPI.js The `this.textInput` sub-object exposed to user scripts (see scripting/ScriptAPI.js). Mirrors TextAPI.js/ChatLogAPI.js's Proxy pattern. The typical read…"
+    },
+    {
+     "name": "width",
+     "kind": "property",
+     "doc": ""
+    }
+   ]
+  },
+  "Joystick": {
+   "summary": "Virtual touch joystick for mobile and pointer-driven control schemes.",
+   "docs": "docs/v1.0.0/api/components/joystick.html",
+   "source": "project/runtime/components/Joystick.js",
+   "sceneFields": [
+    {
+     "name": "positionMode",
+     "default": "Fixed",
+     "type": "enum:JoystickPositionMode"
+    },
+    {
+     "name": "regionX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "regionY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "regionWidth",
+     "default": "640",
+     "type": "number"
+    },
+    {
+     "name": "regionHeight",
+     "default": "720",
+     "type": "number"
+    },
+    {
+     "name": "baseRadius",
+     "default": "60",
+     "type": "number"
+    },
+    {
+     "name": "knobRadius",
+     "default": "28",
+     "type": "number"
+    },
+    {
+     "name": "baseColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "baseOpacity",
+     "default": "0.25",
+     "type": "number"
+    },
+    {
+     "name": "knobColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "knobOpacity",
+     "default": "0.6",
+     "type": "number"
+    },
+    {
+     "name": "outlineColor",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "outlineWidth",
+     "default": "2",
+     "type": "number"
+    },
+    {
+     "name": "deadZone",
+     "default": "0.1",
+     "type": "number"
+    },
+    {
+     "name": "returnToCenter",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "hideWhenIdle",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "idleOpacityMultiplier",
+     "default": "0.35",
+     "type": "number"
+    },
+    {
+     "name": "x",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "y",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "magnitude",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "angle",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "active",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "baseScreenX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "baseScreenY",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.joystick",
+   "scriptMembers": [
+    {
+     "name": "active",
+     "kind": "read-only property",
+     "doc": "True while a finger/mouse is actively dragging this joystick right now (read-only)."
+    },
+    {
+     "name": "angle",
+     "kind": "read-only property",
+     "doc": "Degrees, 0 = right, 90 = down — screen-space angle of the push direction (read-only). Meaningful even at magnitude 0 (holds the last direction)."
+    },
+    {
+     "name": "baseColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "baseOpacity",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "baseRadius",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "deadZone",
+     "kind": "property",
+     "doc": "0..1 fraction of baseRadius the knob must move before x/y leaves 0."
+    },
+    {
+     "name": "hideWhenIdle",
+     "kind": "property",
+     "doc": "true = invisible until actively being dragged."
+    },
+    {
+     "name": "idleOpacityMultiplier",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "knobColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "knobOpacity",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "knobRadius",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "magnitude",
+     "kind": "read-only property",
+     "doc": "0..1 distance the knob is pushed from center, after dead zone (read-only)."
+    },
+    {
+     "name": "outlineColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "outlineWidth",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "positionMode",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "regionHeight",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "regionWidth",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "regionX",
+     "kind": "property",
+     "doc": "Dynamic-mode touchable screen region — ignored in Fixed mode."
+    },
+    {
+     "name": "regionY",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "returnToCenter",
+     "kind": "property",
+     "doc": "true = knob snaps back to center on release; false = holds its last position."
+    },
+    {
+     "name": "x",
+     "kind": "read-only property",
+     "doc": "runtime/scripting/components/JoystickAPI.js The `this.joystick` sub-object exposed to user scripts (see scripting/ScriptAPI.js). Mirrors TextInputAPI.js/ChatLogAPI.js's Proxy pattern. The typical…"
+    },
+    {
+     "name": "y",
+     "kind": "read-only property",
+     "doc": "-1..1 vertical knob offset, down = positive (read-only, after dead zone)."
+    }
+   ]
+  },
+  "Rigidbody2D": {
+   "summary": "2D physics body backed by the engine physics runtime. Dynamic, Kinematic and Static bodies have different script controls.",
+   "docs": "docs/v1.0.0/api/components/rigidbody2d.html",
+   "source": "project/runtime/components/Rigidbody2D.js",
+   "sceneFields": [
+    {
+     "name": "bodyType",
+     "default": "Dynamic",
+     "type": "enum:BodyType"
+    },
+    {
+     "name": "simulated",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "mass",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "gravityScale",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "linearDamping",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "angularDamping",
+     "default": "0.05",
+     "type": "number"
+    },
+    {
+     "name": "lockRotation",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "velocityX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "velocityY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "angularVelocity",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "driveVelocityX",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "driveVelocityY",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "driveAngularVelocity",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "grounded",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "resolvedVelocityX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "resolvedVelocityY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "pendingForceX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "pendingForceY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "pendingImpulseX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "pendingImpulseY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "pendingTorque",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "pendingAngularImpulse",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.rigidbody",
+   "scriptMembers": [
+    {
+     "name": "addAngularImpulse",
+     "kind": "method",
+     "doc": "Instantaneous angular velocity change, applied once."
+    },
+    {
+     "name": "addForce",
+     "kind": "method",
+     "doc": "runtime/scripting/components/RigidbodyAPI.js The `this.rigidbody` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header…"
+    },
+    {
+     "name": "addImpulse",
+     "kind": "method",
+     "doc": "Instantaneous velocity change (impulse = mass * delta-v), applied once."
+    },
+    {
+     "name": "addTorque",
+     "kind": "method",
+     "doc": "Continuous rotational force — call every frame to sustain a spin."
+    },
+    {
+     "name": "gravityScale",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "groundAngle",
+     "kind": "read-only property",
+     "doc": "The ACTUAL angle (degrees) of the steepest walkable ground/slope contact this step, measured from flat horizontal (0 = flat floor, up to groundAngleLimit = the steepest surface still classified as…"
+    },
+    {
+     "name": "groundAngleLimit",
+     "kind": "property",
+     "doc": "Maximum angle from horizontal (degrees) that counts as walkable ground for THIS body. Contacts steeper than this are walls or unclimbable slopes. Default 45. Example: this.rigidbody.groundAngleLimit…"
+    },
+    {
+     "name": "grounded",
+     "kind": "read-only property",
+     "doc": "Deprecated alias for isGrounded — kept for compatibility with existing scripts."
+    },
+    {
+     "name": "isGrounded",
+     "kind": "read-only property",
+     "doc": "True when this Dynamic body's own CharacterController (if any) has computed it as grounded this frame — see ControllerSystem.js's _applyDynamic(), which is the only thing that ever writes…"
+    },
+    {
+     "name": "isOnCeiling",
+     "kind": "read-only property",
+     "doc": "True when the controller has detected a ceiling contact above the body."
+    },
+    {
+     "name": "isOnSlope",
+     "kind": "read-only property",
+     "doc": "True when the body is grounded on a sloped surface (groundAngle >= slopeMinAngle)."
+    },
+    {
+     "name": "isOnWall",
+     "kind": "read-only property",
+     "doc": "True when the controller has detected a wall contact on either side."
+    },
+    {
+     "name": "move",
+     "kind": "method",
+     "doc": "KINEMATIC: velocity drives the character-controller sweep; move() is a one-shot swept nudge; grounded/resolvedVelocity are read-only results of that sweep. No force/impulse/torque — Rapier never…"
+    },
+    {
+     "name": "resolvedVelocity",
+     "kind": "read-only property",
+     "doc": "The ACTUAL (possibly blocked/slid) movement achieved last step — use this instead of velocity to check \"did I really move?\"."
+    },
+    {
+     "name": "slopeMinAngle",
+     "kind": "property",
+     "doc": "Minimum groundAngle (degrees) before isOnSlope becomes true. Contacts below this are treated as flat ground. Default 10. Must not be higher than groundAngleLimit if you want a surface to be able to…"
+    },
+    {
+     "name": "type",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "velocity",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "velocityX",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "velocityY",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "wallAngleLimit",
+     "kind": "property",
+     "doc": "Contacts between groundAngleLimit and this angle (degrees) are \"too steep\" but NOT walls. Only contacts at or above this angle (nearly vertical) set isOnWall. Default 70. Example:…"
+    }
+   ]
+  },
+  "Collider2D": {
+   "summary": "Physics collision shape and contact filtering. A Collider2D is also required for accurate pointer/touch hit tests.",
+   "docs": "docs/v1.0.0/api/components/collider2d.html",
+   "source": "project/runtime/components/Collider2D.js",
+   "sceneFields": [
+    {
+     "name": "shape",
+     "default": "Box",
+     "type": "enum:ColliderShape"
+    },
+    {
+     "name": "width",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "height",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "radius",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "capsuleHalfHeight",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "capsuleRadius",
+     "default": "0.3",
+     "type": "number"
+    },
+    {
+     "name": "trianglePoints",
+     "default": "[ { x: -0.5, y: 0.5 }, { x: 0.5, y: 0.5 }, { x: 0, y: -0.5 }, ]",
+     "type": "array"
+    },
+    {
+     "name": "offsetX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "offsetY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "isTrigger",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "isOneWayPlatform",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "friction",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "restitution",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "density",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "layer",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "mask",
+     "default": "0xFFFF",
+     "type": "value"
+    }
+   ],
+   "scriptModule": "this.collider",
+   "scriptMembers": [
+    {
+     "name": "isColliding",
+     "kind": "method",
+     "doc": "runtime/scripting/components/ColliderAPI.js The `this.collider` sub-object exposed to user scripts. Collider settings remain plain component data; this file provides a safe live view of the settings…"
+    }
+   ]
+  },
+  "Joint2D": {
+   "summary": "Connect physics bodies with Fixed, Revolute, Prismatic, Rope or Spring constraints.",
+   "docs": "docs/v1.0.0/api/components/joint2d.html",
+   "source": "project/runtime/components/Joint2D.js",
+   "sceneFields": [
+    {
+     "name": "jointType",
+     "default": "Revolute",
+     "type": "enum:JointType2D"
+    },
+    {
+     "name": "connectedEntityId",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "anchor1X",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "anchor1Y",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "anchor2X",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "anchor2Y",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "axisX",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "axisY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "length",
+     "default": "100",
+     "type": "number"
+    },
+    {
+     "name": "stiffness",
+     "default": "6000",
+     "type": "number"
+    },
+    {
+     "name": "damping",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "segmentCount",
+     "default": "18",
+     "type": "number"
+    },
+    {
+     "name": "ropeMass",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "visualEnabled",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "visualColor",
+     "default": "#c8a66a",
+     "type": "string"
+    },
+    {
+     "name": "visualThickness",
+     "default": "3",
+     "type": "number"
+    },
+    {
+     "name": "useTexture",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "textureKey",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "textureMode",
+     "default": "stretch",
+     "type": "string"
+    },
+    {
+     "name": "textureTiling",
+     "default": "32",
+     "type": "number"
+    },
+    {
+     "name": "textureScale",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "textureOffset",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "textureFlip",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "limitsEnabled",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "limitMin",
+     "default": "-45",
+     "type": "number"
+    },
+    {
+     "name": "limitMax",
+     "default": "45",
+     "type": "number"
+    },
+    {
+     "name": "motorEnabled",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "motorSpeed",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "motorMaxForce",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "collideConnected",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "enabled",
+     "default": "true",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": "this.joint",
+   "scriptMembers": [
+    {
+     "name": "axis",
+     "kind": "property",
+     "doc": "runtime/scripting/components/JointAPI.js The `this.joint` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header comment for…"
+    },
+    {
+     "name": "collideConnected",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "damping",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "enabled",
+     "kind": "property",
+     "doc": "Set false to remove the live Rapier joint next step without deleting the component — the two bodies move independently again until re-enabled."
+    },
+    {
+     "name": "length",
+     "kind": "property",
+     "doc": "Rope: total physical link-path length. Spring: endpoint rest length."
+    },
+    {
+     "name": "limitMax",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "limitMin",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "limitsEnabled",
+     "kind": "property",
+     "doc": "Revolute (degrees) + Prismatic (pixels) only."
+    },
+    {
+     "name": "motorEnabled",
+     "kind": "property",
+     "doc": "Revolute (deg/sec) + Prismatic (px/sec) only. motorMaxForce=0 behaves as \"off\" even with motorEnabled=true — see Joint2D.js."
+    },
+    {
+     "name": "motorMaxForce",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "motorSpeed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "ropeMass",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "segmentCount",
+     "kind": "property",
+     "doc": "Rope/String: number of physical links used to distribute gravity."
+    },
+    {
+     "name": "stiffness",
+     "kind": "property",
+     "doc": "Spring/String only."
+    },
+    {
+     "name": "textureFlip",
+     "kind": "property",
+     "doc": "Mirrors the texture across the rope's length."
+    },
+    {
+     "name": "textureKey",
+     "kind": "property",
+     "doc": "Logical sprite/texture asset key painted along the rope/string when useTexture is true."
+    },
+    {
+     "name": "textureMode",
+     "kind": "property",
+     "doc": "\"stretch\" (fit the whole image end-to-end, warps as length changes) or \"tile\" (repeat at natural size, never stretches)."
+    },
+    {
+     "name": "textureOffset",
+     "kind": "property",
+     "doc": "Shifts the texture along the rope's length, in the same units as textureTiling."
+    },
+    {
+     "name": "textureScale",
+     "kind": "property",
+     "doc": "How many times the texture repeats ACROSS the rope's thickness."
+    },
+    {
+     "name": "textureTiling",
+     "kind": "property",
+     "doc": "Tile mode only: world px one tile covers along the rope's length."
+    },
+    {
+     "name": "useTexture",
+     "kind": "property",
+     "doc": "When true, the rope/string is textured with textureKey's image instead of a flat visualColor line."
+    },
+    {
+     "name": "visualColor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "visualEnabled",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "visualThickness",
+     "kind": "property",
+     "doc": ""
+    }
+   ]
+  },
+  "CharacterController": {
+   "summary": "High-level movement modes: Character Controller, Platformer, Top-Down, Car, Follow, Patrol and Free.",
+   "docs": "docs/v1.0.0/api/components/charactercontroller.html",
+   "source": "project/runtime/components/CharacterController.js",
+   "sceneFields": [
+    {
+     "name": "controllerType",
+     "default": "Character Controller",
+     "type": "enum:ControllerType"
+    },
+    {
+     "name": "moveSpeed",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "acceleration",
+     "default": "20",
+     "type": "number"
+    },
+    {
+     "name": "airControl",
+     "default": "0.5",
+     "type": "number"
+    },
+    {
+     "name": "canJump",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "jumpForce",
+     "default": "420",
+     "type": "number"
+    },
+    {
+     "name": "maxJumps",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "useGravity",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "gravityScale",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "useDefaultInput",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "maxSpeed",
+     "default": "350",
+     "type": "number"
+    },
+    {
+     "name": "carAcceleration",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "brakeForce",
+     "default": "400",
+     "type": "number"
+    },
+    {
+     "name": "turnSpeed",
+     "default": "150",
+     "type": "number"
+    },
+    {
+     "name": "driftFactor",
+     "default": "0.92",
+     "type": "number"
+    },
+    {
+     "name": "driveTowardArriveDistance",
+     "default": "12",
+     "type": "number"
+    },
+    {
+     "name": "targetName",
+     "default": "",
+     "type": "string"
+    },
+    {
+     "name": "followSpeed",
+     "default": "150",
+     "type": "number"
+    },
+    {
+     "name": "followDistance",
+     "default": "5",
+     "type": "number"
+    },
+    {
+     "name": "patrolDistance",
+     "default": "150",
+     "type": "number"
+    },
+    {
+     "name": "patrolMode",
+     "default": "Platformer",
+     "type": "enum:PatrolMode"
+    },
+    {
+     "name": "patrolAxis",
+     "default": "Horizontal",
+     "type": "enum:PatrolAxis"
+    },
+    {
+     "name": "requestJump",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "requestMoveX",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestMoveY",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestThrottle",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestSteer",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestJoystickX",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestJoystickY",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestDriveTowardX",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestDriveTowardY",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "requestFlip",
+     "default": "false",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": "this.controller",
+   "scriptMembers": [
+    {
+     "name": "acceleration",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "airControl",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "brakeForce",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "controllerType",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "driftFactor",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "driveTowardArriveDistance",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "flipDirection",
+     "kind": "method",
+     "doc": ""
+    },
+    {
+     "name": "followDistance",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "followSpeed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "gravityScale",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "maxSpeed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "moveSpeed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "patrolAxis",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "patrolDistance",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "patrolMode",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "simulateDrive",
+     "kind": "method",
+     "doc": ""
+    },
+    {
+     "name": "simulateDriveJoystick",
+     "kind": "method",
+     "doc": ""
+    },
+    {
+     "name": "simulateDriveToward",
+     "kind": "method",
+     "doc": ""
+    },
+    {
+     "name": "simulateMove",
+     "kind": "method",
+     "doc": ""
+    },
+    {
+     "name": "targetName",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "turnSpeed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "useDefaultInput",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "useGravity",
+     "kind": "property",
+     "doc": ""
+    }
+   ]
+  },
+  "SpriteAnimation": {
+   "summary": "Sprite-sheet/clip animation state on a SpriteRenderer.",
+   "docs": "docs/v1.0.0/api/components/spriteanimation.html",
+   "source": "project/runtime/components/SpriteAnimation.js",
+   "sceneFields": [
+    {
+     "name": "clips",
+     "default": "[]",
+     "type": "array"
+    },
+    {
+     "name": "currentClipId",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "playing",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "speed",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "currentFrameIndex",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "frameElapsed",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.animator",
+   "scriptMembers": [
+    {
+     "name": "currentClip",
+     "kind": "read-only property",
+     "doc": "The name of the currently active clip (read-only)."
+    },
+    {
+     "name": "currentFrame",
+     "kind": "property",
+     "doc": "Index (0-based) of the frame currently showing on the active clip. Read/write — set it to jump to a specific frame without restarting playback (frameElapsed resets so the NEXT frame advance is a full…"
+    },
+    {
+     "name": "play",
+     "kind": "method",
+     "doc": "runtime/scripting/components/AnimatorAPI.js The `this.animator` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header…"
+    },
+    {
+     "name": "playing",
+     "kind": "read-only property",
+     "doc": "True while an animation is playing (read-only)."
+    },
+    {
+     "name": "speed",
+     "kind": "property",
+     "doc": "Playback speed multiplier — 1 = the active clip's own fps, 2 = double speed, 0.5 = half speed, 0 = frozen on the current frame without pausing (this.animator.playing stays true). Read/write; same…"
+    },
+    {
+     "name": "stop",
+     "kind": "method",
+     "doc": "Stop the current animation. Throws if no Sprite Animation component."
+    },
+    {
+     "name": "totalFrames",
+     "kind": "read-only property",
+     "doc": "Frame count of the currently active clip (read-only). 0 if no active clip."
+    }
+   ]
+  },
+  "Camera": {
+   "summary": "Orthographic 2D camera with reference resolutions, responsive scaling, follow, shake and optional pseudo-3D sprite depth scaling.",
+   "docs": "docs/v1.0.0/api/components/camera.html",
+   "source": "project/runtime/components/Camera.js",
+   "sceneFields": [
+    {
+     "name": "backgroundColor",
+     "default": "#314D79",
+     "type": "string"
+    },
+    {
+     "name": "projection",
+     "default": "Orthographic",
+     "type": "string"
+    },
+    {
+     "name": "size",
+     "default": "5",
+     "type": "number"
+    },
+    {
+     "name": "nearClip",
+     "default": "0.3",
+     "type": "number"
+    },
+    {
+     "name": "farClip",
+     "default": "1000",
+     "type": "number"
+    },
+    {
+     "name": "isMain",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "aspectMode",
+     "default": "Landscape",
+     "type": "enum:CameraAspectMode"
+    },
+    {
+     "name": "landscapeWidth",
+     "default": "960",
+     "type": "number"
+    },
+    {
+     "name": "landscapeHeight",
+     "default": "540",
+     "type": "number"
+    },
+    {
+     "name": "portraitWidth",
+     "default": "540",
+     "type": "number"
+    },
+    {
+     "name": "portraitHeight",
+     "default": "960",
+     "type": "number"
+    },
+    {
+     "name": "squareSize",
+     "default": "720",
+     "type": "number"
+    },
+    {
+     "name": "customWidth",
+     "default": "800",
+     "type": "number"
+    },
+    {
+     "name": "customHeight",
+     "default": "600",
+     "type": "number"
+    },
+    {
+     "name": "enablePseudo3D",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "renderToSpriteEntityId",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "scalingMode",
+     "default": "Fit",
+     "type": "enum:ScalingMode"
+    },
+    {
+     "name": "keepHeight",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "aspectRatioLock",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "allowStretching",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "letterboxing",
+     "default": "Auto",
+     "type": "string"
+    },
+    {
+     "name": "pillarboxing",
+     "default": "Auto",
+     "type": "string"
+    },
+    {
+     "name": "barColor",
+     "default": "#000000",
+     "type": "string"
+    },
+    {
+     "name": "integerScaling",
+     "default": "false",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": "this.camera",
+   "scriptMembers": [
+    {
+     "name": "allowStretching",
+     "kind": "property",
+     "doc": "STRETCH-only safety override: false (default) downgrades Stretch to behave like Fit, so the picture can never actually distort. Set true to permit real non-uniform stretching."
+    },
+    {
+     "name": "aspectMode",
+     "kind": "property",
+     "doc": "Which reference-resolution field set is active: 'Landscape' | 'Portrait' | 'Square' | 'Custom'. Switching this changes which of landscapeWidth/portraitWidth/squareSize/customWidth (etc.) the game is…"
+    },
+    {
+     "name": "aspectRatioLock",
+     "kind": "property",
+     "doc": "EXPAND-only safety override: true downgrades Expand to behave like Fit, so the reference aspect ratio is never altered. No effect on Fit/Fill/Stretch."
+    },
+    {
+     "name": "backgroundColor",
+     "kind": "property",
+     "doc": "Background/clear color as a hex string, e.g. \"#1a1a2e\"."
+    },
+    {
+     "name": "barColor",
+     "kind": "property",
+     "doc": "Color painted into letterbox/pillarbox bars when they're shown, as a hex string."
+    },
+    {
+     "name": "customHeight",
+     "kind": "property",
+     "doc": "Reference resolution height in px, used when aspectMode === 'Custom'."
+    },
+    {
+     "name": "customWidth",
+     "kind": "property",
+     "doc": "Reference resolution width in px, used when aspectMode === 'Custom'."
+    },
+    {
+     "name": "enablePseudo3D",
+     "kind": "property",
+     "doc": "Scene-wide fake-3D depth toggle. When true, every sprite's Transform.z also scales its rendered size (more negative z = farther from camera = smaller) on top of always controlling draw order. When…"
+    },
+    {
+     "name": "follow",
+     "kind": "method",
+     "doc": "Smoothly follow a target entity every frame — keeps this camera centered on `target` (offset by offsetX/offsetY if given) with optional lerp smoothing. this.camera.follow(find(\"Player\"));…"
+    },
+    {
+     "name": "integerScaling",
+     "kind": "property",
+     "doc": "Rounds the computed device-fit scale down to the nearest whole integer (never below 1x) — keeps pixel art crisp instead of blurry at fractional scales. No effect on a genuine Stretch…"
+    },
+    {
+     "name": "keepHeight",
+     "kind": "property",
+     "doc": "EXPAND-only: true keeps the reference HEIGHT exact (width expands/ contracts to match the device), false keeps the reference WIDTH exact instead. No effect on any other scalingMode."
+    },
+    {
+     "name": "landscapeHeight",
+     "kind": "property",
+     "doc": "Reference resolution height in px, used when aspectMode === 'Landscape'."
+    },
+    {
+     "name": "landscapeWidth",
+     "kind": "property",
+     "doc": "Reference resolution width in px, used when aspectMode === 'Landscape'."
+    },
+    {
+     "name": "letterboxing",
+     "kind": "property",
+     "doc": "Horizontal bars (top/bottom): 'Auto' | 'On' | 'Off'. Shown when Fit (or a mode downgraded to Fit) leaves vertical space unused."
+    },
+    {
+     "name": "offsetX",
+     "kind": "property",
+     "doc": "Get/set the X offset of an active camera.follow(). Lets you shift the look-ahead direction without restarting the follow loop: this.camera.offsetX = this.rigidbody.velocityX > 0 ? 80 : -80;"
+    },
+    {
+     "name": "offsetY",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "pillarboxing",
+     "kind": "property",
+     "doc": "Vertical bars (left/right): 'Auto' | 'On' | 'Off'. Same idea as letterboxing, for horizontal space left over."
+    },
+    {
+     "name": "portraitHeight",
+     "kind": "property",
+     "doc": "Reference resolution height in px, used when aspectMode === 'Portrait'."
+    },
+    {
+     "name": "portraitWidth",
+     "kind": "property",
+     "doc": "Reference resolution width in px, used when aspectMode === 'Portrait'."
+    },
+    {
+     "name": "renderToSprite",
+     "kind": "method",
+     "doc": "Renders this camera's view onto the given sprite entity's texture every frame (a minimap / security-camera feed). Pass an entity returned by find() (e.g. this.camera.renderToSprite(find('Minimap'))).…"
+    },
+    {
+     "name": "scalingMode",
+     "kind": "property",
+     "doc": "How the reference resolution maps onto the player's actual screen size: 'Expand' | 'Fit' | 'Fill' | 'Stretch'. See Camera.js's ScalingMode doc comment for exactly what each mode does."
+    },
+    {
+     "name": "shake",
+     "kind": "method",
+     "doc": "Shake the camera with a random positional offset that decays over time. intensity — peak shake radius in px (default 10). duration — how long the shake lasts in seconds (default 0.3).…"
+    },
+    {
+     "name": "squareSize",
+     "kind": "property",
+     "doc": "Reference resolution size in px (1:1), used when aspectMode === 'Square'."
+    },
+    {
+     "name": "stopFollow",
+     "kind": "method",
+     "doc": "Stop a camera.follow() already in progress. Safe to call even when not currently following anything (does nothing in that case). this.camera.stopFollow();"
+    },
+    {
+     "name": "x",
+     "kind": "property",
+     "doc": "Camera world-space X position (same as this.x on the camera entity)."
+    },
+    {
+     "name": "y",
+     "kind": "property",
+     "doc": "Camera world-space Y position (same as this.y on the camera entity)."
+    },
+    {
+     "name": "zoom",
+     "kind": "property",
+     "doc": "runtime/scripting/components/CameraAPI.js The `this.camera` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header comment…"
+    }
+   ]
+  },
+  "AudioSource": {
+   "summary": "Play a local audio asset, optionally with distance-based 3D attenuation.",
+   "docs": "docs/v1.0.0/api/components/audiosource.html",
+   "source": "project/runtime/components/AudioSource.js",
+   "sceneFields": [
+    {
+     "name": "audioKey",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "is3D",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "volume",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "pitch",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "loop",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "autoplay",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "minDistance",
+     "default": "100",
+     "type": "number"
+    },
+    {
+     "name": "maxDistance",
+     "default": "600",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.audio",
+   "scriptMembers": [
+    {
+     "name": "pitch",
+     "kind": "property",
+     "doc": "Playback rate / pitch: 1.0 = normal, 2.0 = one octave up (double speed), 0.5 = one octave down (half speed). Clamped to 0.25–4. Throws if no Audio Source."
+    },
+    {
+     "name": "play",
+     "kind": "method",
+     "doc": "runtime/scripting/components/AudioAPI.js The `this.audio` sub-object exposed to user scripts (see scripting/ScriptAPI.js). One file per scripting component — see TransformAPI.js's header comment for…"
+    },
+    {
+     "name": "playOnce",
+     "kind": "method",
+     "doc": "Play the clip once from the start as an independent, pooled voice — never interrupts a still-playing previous playOnce() call or the main play()/Loop playback. Perfect for a one-off SFX fired…"
+    },
+    {
+     "name": "playing",
+     "kind": "read-only property",
+     "doc": "True when the audio source is set to play on awake / is playing."
+    },
+    {
+     "name": "stop",
+     "kind": "method",
+     "doc": "Stop playback. Throws if no Audio Source component."
+    },
+    {
+     "name": "volume",
+     "kind": "property",
+     "doc": "Volume: 0.0 (silent) to 1.0 (full). Throws if no Audio Source."
+    }
+   ]
+  },
+  "AudioListener": {
+   "summary": "Defines the hearing area for 3D audio and drives audio enter/leave callbacks.",
+   "docs": "docs/v1.0.0/api/components/audiolistener.html",
+   "source": "project/runtime/components/AudioListener.js",
+   "sceneFields": [
+    {
+     "name": "radius",
+     "default": "300",
+     "type": "number"
+    },
+    {
+     "name": "enabled",
+     "default": "true",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": "this.ear",
+   "scriptMembers": [
+    {
+     "name": "canHear",
+     "kind": "method",
+     "doc": "True if the named (or tagged, with {byTag:true}) 3D AudioSource entity is currently within range of this listener — the beginner-friendly single-target check, so a script doesn't have to loop…"
+    },
+    {
+     "name": "enabled",
+     "kind": "property",
+     "doc": "Whether this listener is currently detecting sounds at all."
+    },
+    {
+     "name": "radius",
+     "kind": "property",
+     "doc": "runtime/scripting/components/AudioListenerAPI.js The `this.ear` sub-object exposed to user scripts (see scripting/ScriptAPI.js) — the query surface for the AudioListener component (see…"
+    },
+    {
+     "name": "sourcesInRange",
+     "kind": "read-only property",
+     "doc": "Every 3D AudioSource entity currently inside this listener's radius, as an array of live EntityContexts (empty array if none — never null, matches findAll()'s \"always an array\" convention).…"
+    }
+   ]
+  },
+  "Light": {
+   "summary": "2D light source supporting Directional, Point, Spot, Area, GodRays and Freeform light shapes.",
+   "docs": "docs/v1.0.0/api/components/light.html",
+   "source": "project/runtime/components/Light.js",
+   "sceneFields": [
+    {
+     "name": "type",
+     "default": "Point",
+     "type": "enum:LightType"
+    },
+    {
+     "name": "color",
+     "default": "#ffffff",
+     "type": "string"
+    },
+    {
+     "name": "intensity",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "radius",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "angle",
+     "default": "45",
+     "type": "number"
+    },
+    {
+     "name": "width",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "height",
+     "default": "200",
+     "type": "number"
+    },
+    {
+     "name": "castsOnWorld",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "castShadows",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "shadowColor",
+     "default": "#000000",
+     "type": "string"
+    },
+    {
+     "name": "shadowStrength",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "flicker",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "flickerSpeed",
+     "default": "8",
+     "type": "number"
+    },
+    {
+     "name": "flickerDuration",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "coreSize",
+     "default": "0.22",
+     "type": "number"
+    },
+    {
+     "name": "coreVisible",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "points",
+     "default": "null",
+     "type": "null"
+    }
+   ],
+   "scriptModule": "this.light",
+   "scriptMembers": [
+    {
+     "name": "angle",
+     "kind": "property",
+     "doc": "Cone angle in degrees (Spot / GodRays only). The full cone width, centered on the entity's Transform.rotation. Clamped to [0, 360]."
+    },
+    {
+     "name": "castShadows",
+     "kind": "property",
+     "doc": "Enable real-time shadow casting: every ShadowCaster entity blocks this light and casts a dark region behind it. Real rendering cost (one shadow shape per ShadowCaster per shadow-casting light per…"
+    },
+    {
+     "name": "castsOnWorld",
+     "kind": "property",
+     "doc": "When true (default) this light visually illuminates the scene. Set to false to keep the light in the scene graph (so scripts can read its position and data) without any rendering cost or visual…"
+    },
+    {
+     "name": "color",
+     "kind": "property",
+     "doc": "Light color as a hex string, e.g. \"#ffdd88\" for warm orange-yellow."
+    },
+    {
+     "name": "coreSize",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "coreVisible",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "flicker",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "flickerDuration",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "flickerSpeed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "height",
+     "kind": "property",
+     "doc": "Flat-lit rectangle height in px (Area lights only). Clamped to >= 0."
+    },
+    {
+     "name": "intensity",
+     "kind": "property",
+     "doc": "Brightness: 0 = off, 1 = normal, >1 = overbright (HDR-style bloom). Drives both how far the light punches through ambient darkness and how brightly it tints sprites. Clamped to >= 0."
+    },
+    {
+     "name": "radius",
+     "kind": "property",
+     "doc": "Falloff radius in world units / px (Point / Spot / Area / GodRays). Beyond this distance from the light the scene receives no illumination from it. Clamped to >= 0."
+    },
+    {
+     "name": "shadowColor",
+     "kind": "property",
+     "doc": "Shadow tint as a hex string, e.g. \"#000000\" (black) or \"#1a1a3a\" (blue-tinted)."
+    },
+    {
+     "name": "shadowStrength",
+     "kind": "property",
+     "doc": "Shadow opacity multiplier: 0 = this light casts no visible shadow, 1 = full-strength shadow. Multiplied with each ShadowCaster's own opacity, so either can independently control shadow density.…"
+    },
+    {
+     "name": "type",
+     "kind": "property",
+     "doc": "runtime/scripting/components/LightAPI.js The `this.light` sub-object exposed to user scripts on any entity that has a Light component. Lets scripts animate lights at runtime — fade intensity, change…"
+    },
+    {
+     "name": "width",
+     "kind": "property",
+     "doc": "Flat-lit rectangle width in px (Area lights only). Clamped to >= 0."
+    }
+   ]
+  },
+  "ShadowCaster": {
+   "summary": "Marks an entity as a shadow occluder for the lighting system.",
+   "docs": "docs/v1.0.0/api/components/shadowcaster.html",
+   "source": "project/runtime/components/ShadowCaster.js",
+   "sceneFields": [
+    {
+     "name": "enabled",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "width",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "height",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "offsetX",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "offsetY",
+     "default": "0",
+     "type": "number"
+    },
+    {
+     "name": "opacity",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "length",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "softness",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.shadowCaster",
+   "scriptMembers": [
+    {
+     "name": "enabled",
+     "kind": "property",
+     "doc": "runtime/scripting/components/ShadowCasterAPI.js The `this.shadowCaster` sub-object exposed to user scripts on any entity that has a ShadowCaster component (see components/ShadowCaster.js). Lets…"
+    },
+    {
+     "name": "height",
+     "kind": "property",
+     "doc": "Optional explicit occluder height override, in world units/px. null (the default) uses this entity's real rendered sprite bounds."
+    },
+    {
+     "name": "length",
+     "kind": "property",
+     "doc": "How far this object's shadow reaches, as a multiplier on the casting light's natural reach. 1 = normal reach, 0.5 = a short contact-y shadow, 2 = a long late-afternoon-sun-style shadow. Clamped to >=…"
+    },
+    {
+     "name": "offsetX",
+     "kind": "property",
+     "doc": "Occluder box center X offset from the entity's Transform, in LOCAL space."
+    },
+    {
+     "name": "offsetY",
+     "kind": "property",
+     "doc": "Occluder box center Y offset from the entity's Transform, in LOCAL space."
+    },
+    {
+     "name": "opacity",
+     "kind": "property",
+     "doc": "How dark this object's shadow reads, 0 (invisible/no shadow) to 1 (full ambient darkness). Multiplied with the casting light's own shadowStrength. Clamped to [0, 1]."
+    },
+    {
+     "name": "softness",
+     "kind": "property",
+     "doc": "Soft shadow edge (penumbra) amount in world units/px. 0 = crisp hard edge. Clamped to >= 0."
+    },
+    {
+     "name": "width",
+     "kind": "property",
+     "doc": "Optional explicit occluder width override, in world units/px. null (the default) uses this entity's real rendered sprite bounds."
+    }
+   ]
+  },
+  "LightingSettings": {
+   "summary": "Scene-wide lighting quality and mood controls. Attach to one entity; the lighting system reads it scene-wide.",
+   "docs": "docs/v1.0.0/api/components/lightingsettings.html",
+   "source": "project/runtime/components/LightingSettings.js",
+   "sceneFields": [
+    {
+     "name": "shadowMode",
+     "default": "quad",
+     "type": "enum:ShadowMode"
+    },
+    {
+     "name": "raymarchSteps",
+     "default": "24",
+     "type": "number"
+    },
+    {
+     "name": "ambientDarkness",
+     "default": "0.65",
+     "type": "number"
+    },
+    {
+     "name": "glowStrength",
+     "default": "1",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.(scene.lighting)",
+   "scriptMembers": [
+    {
+     "name": "ambientDarkness",
+     "kind": "property",
+     "doc": "How dark the world gets where no light reaches, 0 (no darkening, full daylight everywhere) to 1 (pitch black outside any light's reach). The single biggest \"how moody does my lighting look\" dial."
+    },
+    {
+     "name": "glowStrength",
+     "kind": "property",
+     "doc": "How visible a light's own glow is in open air (not just where it lands on a sprite). 0 = no open-air glow, 1 = normal, higher = brighter/further \"hot\" glow."
+    },
+    {
+     "name": "raymarchSteps",
+     "kind": "property",
+     "doc": "Raymarch step count (1-200), only used when shadowMode === \"Raymarch\". Higher = smoother shadow edges and fewer thin-occluder leaks, at higher GPU cost."
+    },
+    {
+     "name": "shadowMode",
+     "kind": "property",
+     "doc": "runtime/scripting/components/LightingSettingsAPI.js The `scene.lighting` sub-object exposed to user scripts (see scripting/ScriptAPI.js's getGlobals()) — lets scripts tune scene-wide lighting/shadow…"
+    }
+   ]
+  },
+  "NavAgent2D": {
+   "summary": "Per-agent navigation settings and current path state for NavWorld2D pathfinding.",
+   "docs": "docs/v1.0.0/api/components/navagent2d.html",
+   "source": "project/runtime/components/NavAgent2D.js",
+   "sceneFields": [
+    {
+     "name": "radius",
+     "default": "16",
+     "type": "number"
+    },
+    {
+     "name": "speed",
+     "default": "120",
+     "type": "number"
+    },
+    {
+     "name": "acceleration",
+     "default": "800",
+     "type": "number"
+    },
+    {
+     "name": "deceleration",
+     "default": "1000",
+     "type": "number"
+    },
+    {
+     "name": "stoppingDistance",
+     "default": "1",
+     "type": "number"
+    },
+    {
+     "name": "autoRepath",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "repathInterval",
+     "default": "0.35",
+     "type": "number"
+    },
+    {
+     "name": "repathDistance",
+     "default": "4",
+     "type": "number"
+    },
+    {
+     "name": "avoidanceEnabled",
+     "default": "true",
+     "type": "boolean"
+    },
+    {
+     "name": "avoidancePriority",
+     "default": "50",
+     "type": "number"
+    },
+    {
+     "name": "collabEnabled",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "collabGroupRadius",
+     "default": "96",
+     "type": "number"
+    },
+    {
+     "name": "vehicleLookahead",
+     "default": "72",
+     "type": "number"
+    },
+    {
+     "name": "vehicleCornerLookahead",
+     "default": "110",
+     "type": "number"
+    },
+    {
+     "name": "vehicleObstacleLookahead",
+     "default": "120",
+     "type": "number"
+    },
+    {
+     "name": "vehicleObstacleWidth",
+     "default": "28",
+     "type": "number"
+    },
+    {
+     "name": "vehicleSteerSmoothing",
+     "default": "7",
+     "type": "number"
+    },
+    {
+     "name": "vehicleSpeedSmoothing",
+     "default": "5",
+     "type": "number"
+    },
+    {
+     "name": "vehicleCornerSlowdown",
+     "default": "0.72",
+     "type": "number"
+    },
+    {
+     "name": "vehicleObstacleBrake",
+     "default": "0.9",
+     "type": "number"
+    },
+    {
+     "name": "vehicleRecoveryTime",
+     "default": "1.35",
+     "type": "number"
+    },
+    {
+     "name": "vehicleRecoveryReverseTime",
+     "default": "0.9",
+     "type": "number"
+    },
+    {
+     "name": "area",
+     "default": "0xffff",
+     "type": "value"
+    },
+    {
+     "name": "areaCosts",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "currentPath",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "currentPathIndex",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": "this.navAgent",
+   "scriptMembers": [
+    {
+     "name": "acceleration",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "area",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "areaCosts",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "autoRepath",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "avoidanceEnabled",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "avoidancePriority",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "collabEnabled",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "collabGroupRadius",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "currentPath",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "currentPathIndex",
+     "kind": "read-only property",
+     "doc": ""
+    },
+    {
+     "name": "deceleration",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "radius",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "repathDistance",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "repathInterval",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "speed",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "stoppingDistance",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleCornerLookahead",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleCornerSlowdown",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleLookahead",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleObstacleBrake",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleObstacleLookahead",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleObstacleWidth",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleRecoveryReverseTime",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleRecoveryTime",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleSpeedSmoothing",
+     "kind": "property",
+     "doc": ""
+    },
+    {
+     "name": "vehicleSteerSmoothing",
+     "kind": "property",
+     "doc": ""
+    }
+   ]
+  },
+  "NavWorld2D": {
+   "summary": "Shared navigation world for baked or dynamic 2D pathfinding, with 16 navigation areas.",
+   "docs": "docs/v1.0.0/api/components/navworld2d.html",
+   "source": "project/runtime/components/NavWorld2D.js",
+   "sceneFields": [
+    {
+     "name": "boundsX",
+     "default": "-400",
+     "type": "number"
+    },
+    {
+     "name": "boundsY",
+     "default": "-400",
+     "type": "number"
+    },
+    {
+     "name": "boundsWidth",
+     "default": "800",
+     "type": "number"
+    },
+    {
+     "name": "boundsHeight",
+     "default": "800",
+     "type": "number"
+    },
+    {
+     "name": "cellSize",
+     "default": "32",
+     "type": "number"
+    },
+    {
+     "name": "cells",
+     "default": "{}",
+     "type": "object"
+    },
+    {
+     "name": "bakedCells",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "paintOverrides",
+     "default": "{}",
+     "type": "object"
+    },
+    {
+     "name": "cellAreas",
+     "default": "{}",
+     "type": "object"
+    },
+    {
+     "name": "areaCosts",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "allowDiagonal",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "dynamic",
+     "default": "false",
+     "type": "boolean"
+    },
+    {
+     "name": "minObstacleFootprint",
+     "default": "0",
+     "type": "number"
+    }
+   ],
+   "scriptModule": null,
+   "scriptMembers": []
+  },
+  "Tileset": {
+   "summary": "Defines a reusable 16-role autotile set. The editor can auto-slice one image or accept separate role images.",
+   "docs": "docs/v1.0.0/api/components/tileset.html",
+   "source": "project/runtime/components/Tileset.js",
+   "sceneFields": [
+    {
+     "name": "name",
+     "default": "New Tileset",
+     "type": "string"
+    },
+    {
+     "name": "tileWidth",
+     "default": "32",
+     "type": "number"
+    },
+    {
+     "name": "tileHeight",
+     "default": "32",
+     "type": "number"
+    },
+    {
+     "name": "slots",
+     "default": "{}",
+     "type": "object"
+    }
+   ],
+   "scriptModule": null,
+   "scriptMembers": []
+  },
+  "Tilemap": {
+   "summary": "Sparse painted tile grid that references a Tileset entity by ID.",
+   "docs": "docs/v1.0.0/api/components/tilemap.html",
+   "source": "project/runtime/components/Tilemap.js",
+   "sceneFields": [
+    {
+     "name": "tilesetEntityId",
+     "default": "null",
+     "type": "null"
+    },
+    {
+     "name": "cells",
+     "default": "{}",
+     "type": "object"
+    }
+   ],
+   "scriptModule": null,
+   "scriptMembers": []
+  },
+  "Script": {
+   "summary": "Script component holding a script name, source and enabled state.",
+   "docs": "docs/v1.0.0/api/components/script.html",
+   "source": "project/runtime/components/Script.js",
+   "sceneFields": [
+    {
+     "name": "scriptName",
+     "default": "NewScript",
+     "type": "string"
+    },
+    {
+     "name": "source",
+     "default": "",
+     "type": "string"
+    },
+    {
+     "name": "enabled",
+     "default": "true",
+     "type": "boolean"
+    }
+   ],
+   "scriptModule": null,
+   "scriptMembers": []
+  }
+ }
+}

@@ -1,0 +1,72 @@
+api/components/audiolistener: AudioListener.enabled added
+api/components/audiolistener: AudioListener script API + canHear(…)
+api/components/audiolistener: AudioListener script API + sourcesInRange
+api/components/camera: Camera.renderToSpriteEntityId added
+api/components/camera: Camera script API + x
+api/components/camera: Camera script API + y
+api/components/charactercontroller: CharacterController.requestJump added
+api/components/charactercontroller: CharacterController.requestMoveX added
+api/components/charactercontroller: CharacterController.requestMoveY added
+api/components/charactercontroller: CharacterController.requestThrottle added
+api/components/charactercontroller: CharacterController.requestSteer added
+api/components/charactercontroller: CharacterController.requestJoystickX added
+api/components/charactercontroller: CharacterController.requestJoystickY added
+api/components/charactercontroller: CharacterController.requestDriveTowardX added
+api/components/charactercontroller: CharacterController.requestDriveTowardY added
+api/components/charactercontroller: CharacterController.requestFlip added
+api/components/charactercontroller: CharacterController script API + driveTowardArriveDistance
+api/components/collider2d: Collider2D.trianglePoints default → [{x:-0.5,y:0.5}, {x:0.5,y:0.5}, {x:0,y:-0.5}]
+api/components/joystick: Joystick.x added
+api/components/joystick: Joystick.y added
+api/components/joystick: Joystick.magnitude added
+api/components/joystick: Joystick.angle added
+api/components/joystick: Joystick.active added
+api/components/joystick: Joystick.baseScreenX added
+api/components/joystick: Joystick.baseScreenY added
+api/components/joystick: Joystick script API + baseColor
+api/components/joystick: Joystick script API + baseOpacity
+api/components/joystick: Joystick script API + hideWhenIdle
+api/components/joystick: Joystick script API + idleOpacityMultiplier
+api/components/joystick: Joystick script API + knobColor
+api/components/joystick: Joystick script API + knobOpacity
+api/components/joystick: Joystick script API + outlineColor
+api/components/joystick: Joystick script API + outlineWidth
+api/components/navagent2d: NavAgent2D.currentPath added
+api/components/navagent2d: NavAgent2D.currentPathIndex added
+api/components/rigidbody2d: Rigidbody2D.driveVelocityX added
+api/components/rigidbody2d: Rigidbody2D.driveVelocityY added
+api/components/rigidbody2d: Rigidbody2D.driveAngularVelocity added
+api/components/rigidbody2d: Rigidbody2D.grounded added
+api/components/rigidbody2d: Rigidbody2D.resolvedVelocityX added
+api/components/rigidbody2d: Rigidbody2D.resolvedVelocityY added
+api/components/rigidbody2d: Rigidbody2D.pendingForceX added
+api/components/rigidbody2d: Rigidbody2D.pendingForceY added
+api/components/rigidbody2d: Rigidbody2D.pendingImpulseX added
+api/components/rigidbody2d: Rigidbody2D.pendingImpulseY added
+api/components/rigidbody2d: Rigidbody2D.pendingTorque added
+api/components/rigidbody2d: Rigidbody2D.pendingAngularImpulse added
+api/components/rigidbody2d: Rigidbody2D script API + groundAngleLimit
+api/components/rigidbody2d: Rigidbody2D script API + grounded
+api/components/rigidbody2d: Rigidbody2D script API + slopeMinAngle
+api/components/rigidbody2d: Rigidbody2D script API + wallAngleLimit
+api/components/shaperenderer: ShapeRenderer.trianglePoints default → [{x:-50,y:50}, {x:50,y:50}, {x:0,y:-50}]
+api/components/speechbubble: SpeechBubble.hideTimer added
+api/components/spriteanimation: SpriteAnimation.frameElapsed added
+api/components/strokepath: StrokePath.points default → [{x:-100,y:0}, {x:100,y:0}]
+api/components/strokepath: StrokePath.thickness default → 40
+api/components/strokepath: StrokePath.color default → #8a8a8a
+api/components/strokepath: StrokePath.textureTiling default → 100
+api/components/strokepath: StrokePath.jointMode default → round
+api/components/strokepath: StrokePath.capMode default → round
+api/components/strokepath: StrokePath.smoothing added
+api/components/strokepath: StrokePath script API + capMode
+api/components/strokepath: StrokePath script API + jointMode
+api/components/strokepath: StrokePath script API + textureRotation
+api/components/textinput: TextInput.focused added
+api/components/textinput: TextInput.justSubmitted added
+api/components/transform: Transform script API + scale
+concepts/architecture: text fix 'standalone runtime directory/'
+export/android: text fix 'X-Vaelis-Standalone-Export'
+export/android: text fix 'X-Vaelis-Export-Format'
+reference/project-format: text fix 'standalone runtime directory/'
+reference/source-map: text fix 'phyg-updated.zip'
