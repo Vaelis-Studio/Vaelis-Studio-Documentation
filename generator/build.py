@@ -153,7 +153,10 @@ def head(root, title, desc, path, extra='', md_path=None, jsonld=None, og_type='
 <meta property="og:site_name" content="{SITE}"><meta property="og:type" content="{og_type}"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(desc, quote=True)}">{ogurl}
 <meta name="twitter:card" content="summary">
 {canon}{mdl}
-<link rel="icon" href="{root}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{root}favicon.ico" sizes="any">
+<link rel="icon" href="{root}icons/icon-48.png" type="image/png" sizes="48x48">
+<link rel="icon" href="{root}icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="{root}icons/icon-512.png">
 {THEME_BOOT}
 <link rel="stylesheet" href="{root}assets/site.css">
 {extra}{ld}
@@ -343,7 +346,9 @@ shutil.copy2(HERE / 'static/css/site.css', OUT / 'assets').__class__ if False el
 (OUT / 'assets').mkdir(parents=True, exist_ok=True)
 shutil.copy2(HERE / 'static/css/site.css', OUT / 'assets/site.css')
 shutil.copy2(HERE / 'static/js/site.js', OUT / 'assets/site.js')
-write('favicon.svg', LOGO.replace('role="img" aria-label="Vaelis" ', '').replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ', 1))
+shutil.copy2(HERE / 'static/favicon.ico', OUT / 'favicon.ico')
+(OUT / 'icons').mkdir(exist_ok=True)
+for _i in ('icon-48.png','icon-192.png','icon-512.png'): shutil.copy2(HERE / 'static/icons' / _i, OUT / 'icons' / _i)
 
 # ------------------------------------------------------------------ machine-readable outputs
 featured = {'index','getting-started/installation','getting-started/first-game','getting-started/scripting','scripting/lifecycle','scripting/globals','api/index','editor/controls','scripting/api-cookbook','reference/llm-guide'}
