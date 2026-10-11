@@ -3141,9 +3141,9 @@ Android builds show a **Cancel build** button. Do not restart or leave the edito
 
 ### Option 1: use an API key in the editor
 
-1. Get your API key for the APK service.
+1. Get your API key: under the Android card in the Export window click **Click HERE** in "Need an API key?" (it opens [the APK service](https://apk-builder--vaelis-server.replit.app/)).
 2. In the editor open **Export → Android APK** and click **+ Add build server**.
-3. Enter a label (optional), the **Server URL** `https://apk-builder--vaelis-server.replit.app` and your **API Key**, then **Add server**.
+3. Enter a label (optional), check the **Server URL** (prefilled with `https://apk-builder--vaelis-server.replit.app`) and paste your **API Key**, then click **Add server**. The button is always clickable; if the URL or key is empty it tells you which one is missing.
 4. Click the **Android APK** card. The editor builds your game, uploads it, shows progress and downloads the APK when it is ready.
 
 ### Option 2: no API key, export as HTML and upload on the website
