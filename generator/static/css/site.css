@@ -296,3 +296,10 @@ a.card:hover,a.api-card:hover,.card:hover{border-color:var(--accent-line);backgr
 @media (max-width:640px){.feat{grid-template-columns:1fr}.hero-in{padding:44px 20px 50px}.section{padding:52px 20px 4px}.pager{grid-template-columns:1fr}.pn.next{grid-column:1;text-align:left}.brand small{display:none}.doc h2{font-size:23px}.cta-in{padding:32px 24px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.topbar,.sidebar,.toc,.pager,.page-tools,.palette,.anchor,.copy{display:none!important}.shell,.doc-grid{display:block}body{background:#fff;color:#000}.doc p,.doc li,.table-wrap td{color:#111}.codeblock,.table-wrap{break-inside:avoid}}
+
+.easing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:.8em 0 1.6em}
+.easing-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-elev);padding:10px;text-align:center}
+.easing-card svg{width:100%;height:auto;display:block}
+.easing-card .g{stroke:var(--border-strong);stroke-width:1;stroke-dasharray:3 3}
+.easing-card path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.easing-card code{display:block;margin-top:6px;font-size:12.5px}

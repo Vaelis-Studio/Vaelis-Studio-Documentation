@@ -1,0 +1,31 @@
+<!--meta {"title": "The Vaelis Hub", "description": "Projects, starter templates, Learn and Installs tabs, offline PWA install and .vs file association.", "lede": "Projects, starter templates, Learn and Installs tabs, offline PWA install and .vs file association."} -->
+<h2 id="overview">Overview</h2>
+<p>The Hub is the launcher page (<code>index.html</code> of the Vaelis site). Choose <strong>Open Editor</strong> or open a project card to enter the editor. A narrow icon rail on the left switches between three tabs.</p>
+<div class="table-wrap"><table><thead><tr><th>Tab</th><th>What it does</th></tr></thead><tbody>
+<tr><td>Projects</td><td>Recent projects with name, template and last-opened time. Click a card to open it, use the pencil to rename inline (Enter saves, Esc cancels) and the trash to remove it from the launcher. <strong>New Project</strong> opens the template picker.</td></tr>
+<tr><td>Learn</td><td>Documentation entry point (quick start, scripting API, safety). Works offline because it is in the offline cache.</td></tr>
+<tr><td>Installs</td><td>Shows the single engine build that ships with the Hub (Vaelis 1.0.0, Stable).</td></tr>
+</tbody></table></div>
+
+<h2 id="templates">Starter templates</h2>
+<div class="table-wrap"><table><thead><tr><th>Template</th><th>Contents</th></tr></thead><tbody>
+<tr><td>Blank Canvas</td><td>An empty environment for pure 2D rendering and custom logic (default).</td></tr>
+<tr><td>Platformer Kit</td><td>Kinematic controller, one-way platforms and coyote-time jump tuning.</td></tr>
+<tr><td>Top-Down</td><td>Playable starter with player, NPCs, collectible coins and a lit dungeon scene.</td></tr>
+<tr><td>Flappy Bird</td><td>Complete flap-to-fly clone with state machine, scoring and juice, commented for beginners.</td></tr>
+<tr><td>Sky Jumper</td><td>Endless cloud-hopping jumper with bouncy platforms, collectible stars, climbing camera and jump SFX.</td></tr>
+<tr><td>Physics Sandbox</td><td>Rapier2D bodies, colliders and joints pre-wired for prototyping.</td></tr>
+</tbody></table></div>
+<p>Templates other than Blank Canvas are bundled real projects, applied the first time the new project opens in the editor.</p>
+
+<h2 id="offline-pwa">Install and offline use</h2>
+<ol>
+<li>Serve the client over HTTP(S) and open <code>/index.html</code> once while connected.</li>
+<li>Wait for the first load to finish so the service worker can precache the editor, player, runtime and vendor files listed in <code>offline-manifest.json</code>.</li>
+<li>Install the PWA from the browser. The editor, player and engine then launch without a network.</li>
+</ol>
+<p>The service worker also serves the <code>/editor</code>, <code>/play</code> and <code>/player</code> aliases while offline. Android APK creation still needs the external build server. If the editor looks out of date after an update, reload once while online to refresh the cache.</p>
+
+<h2 id="file-association">.vs project files</h2>
+<p>A <code>.vs</code> file is a ZIP archive with Vaelis's own extension. The web manifest declares a <strong>file handler</strong> for it. After installing Vaelis from Chrome or Edge, <code>.vs</code> files get the Vaelis icon (Windows, ChromeOS and Linux Chromium browsers), and double-click or <strong>Open with → Vaelis</strong> opens the editor with that project loaded as an unsaved session; use <strong>File → Save Project</strong> to write changes out. macOS and mobile browsers keep a generic icon.</p>
+<p>For machines without the installed app, <code>file-association/</code> in the distribution has an optional Windows <code>.reg</code> file and a Linux install script. They set only the icon and type name, and are untested on real desktops.</p>

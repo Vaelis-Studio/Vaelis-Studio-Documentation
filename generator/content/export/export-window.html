@@ -1,0 +1,28 @@
+<!--meta {"title": "Export window reference", "description": "Every control in the Export window: game title, favicon, formats, asset optimization, Android build servers, progress, cancel and results.", "lede": "Every control in the Export window: game title, favicon, formats, asset optimization, Android build servers, progress, cancel and results."} -->
+<p>Open it from <strong>File → Export…</strong> or the toolbar <strong>Export</strong> button.</p>
+<h2 id="details">Game details</h2>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Behavior</th></tr></thead><tbody>
+<tr><td>Game title</td><td>Up to 80 characters; defaults to the project name. Used as the page title and, for APKs, the app name.</td></tr>
+<tr><td>Favicon (optional)</td><td>Choose any image; <strong>Change…</strong> and <strong>Remove</strong> manage it. Used as the page icon and the Android launcher icon.</td></tr>
+</tbody></table></div>
+<h2 id="formats">Format cards</h2>
+<div class="table-wrap"><table><thead><tr><th>Card</th><th>Status</th><th>Output</th></tr></thead><tbody>
+<tr><td>HTML5</td><td>Available</td><td>Static site: <code>index.html</code> plus game files.</td></tr>
+<tr><td>PWA</td><td>Available</td><td>HTML5 plus manifest and service worker for install and offline play.</td></tr>
+<tr><td>Desktop (Windows/Mac/Linux)</td><td>Coming soon (disabled)</td><td>Not built in 1.0.0.</td></tr>
+<tr><td>Android APK</td><td>Available</td><td>One debug-signed APK built on a server. See <a href="android.html">Android APK</a>.</td></tr>
+</tbody></table></div>
+<h2 id="build">What the build does</h2>
+<ul>
+<li>Runs entirely in the browser. Images are re-encoded to AVIF when the browser can encode it, otherwise WebP, otherwise left as is. Every candidate is decoded back to verify it before it is trusted. Audio becomes Opus in WebM when the browser can record it.</li>
+<li>Sprites and audio not referenced by any scene, prefab or script are left out.</li>
+<li>Assets are written as real binary files, never base64.</li>
+<li>No editor code is included. The game owns its own render loop and is not frame-capped.</li>
+</ul>
+<h2 id="result">Result screen</h2>
+<p>After HTML5 or PWA export the download starts and the window shows how many images and audio clips were bundled, the size saved (before and after), and how many unused assets were skipped. A warning reminds you not to double-click <code>index.html</code>: from <code>file://</code> the game shows a blank page, so upload the folder to a static host (itch.io, GitHub Pages, Vercel, Netlify) or run a local server (<code>npx serve .</code>).</p>
+<p>If an Android build server is saved, <strong>Build APK from this HTML5 (or PWA) export</strong> sends the export you just made without rebuilding. <strong>Export another format</strong> resets the window.</p>
+<h2 id="android-servers">Android build servers</h2>
+<p>Under the Android card you can save several servers (label, URL, API key), pick the active one, edit or remove entries. They are stored only in this browser. A badge shows <em>Checking server…</em>, <em>Server awake</em> or <em>Server may be asleep</em> (free hosts sleep after inactivity; building wakes them, but the first request can be slow or time out, so try again).</p>
+<h2 id="cancel">Progress and cancel</h2>
+<p>Android builds show a <strong>Cancel build</strong> button. Do not restart or leave the editor while an APK builds; cancelling (or leaving) asks the server to stop the job. The editor polls the build every 2.5 seconds and gives up after 10 minutes. HTML5 and PWA exports finish locally and cannot be cancelled.</p>

@@ -1,2 +1,42 @@
-<!--meta {"title": "Android APK", "description": "Build a debug-signed Android APK by sending your web export to a build server you connect yourself.", "lede": "Build a debug-signed Android APK by sending your web export to a build server you connect yourself."} -->
-<h2 id="requirements">Requirements</h2><div class="callout warn"><strong>This is not a local build</strong><div>The Vaelis client distribution does not include an Android SDK, Gradle, Java tooling, or any local/command-line APK builder. Android builds run on a server you connect; the editor itself cannot compile APKs.</div></div><h2 id="what-you-need">What you need</h2><p>An Android build server URL and API key, from whoever operates that build service. Add them in <strong>Export → Android APK</strong> before building.</p><h2 id="editor-export">Editor export</h2><p>Use <strong>Export → Android APK</strong>, add or select a configured build server, then export. The editor builds the same HTML5/PWA package described in HTML5 &amp; PWA and POSTs that exact ZIP to the server; the resulting APK is debug-signed for direct installation/testing.</p><h2 id="request-contract">Request contract</h2><p>For anyone operating a compatible build server: the editor sends <code>POST /api/v1/build?name=&lt;title&gt;</code> with the export ZIP as the body, headers <code>Content-Type: application/zip</code>, <code>X-Api-Key</code>, <code>X-Vaelis-Standalone-Export: 1</code> and <code>X-Vaelis-Export-Format: html|pwa</code>. The ZIP must contain <code>index.html</code> at its root. The server is expected to return a JSON job ticket with a <code>statusUrl</code>, and the completed status should include a <code>downloadUrl</code>.</p><h2 id="runtime-behavior">Runtime behavior</h2><p>The finished APK hosts the game inside a local HTTPS-style WebView asset origin so ES modules, JSON, audio, images and the physics WASM runtime can work, and does not need the build server (or any other external URL) at runtime — only while it is being built. Modern Pointer Events are preferred, with Touch Events fallback.</p><h2 id="launcher-icon">Launcher icon</h2><p>When a favicon is selected in the export dialog, it is used as the Android launcher/app thumbnail icon.</p>
+<!--meta {"title": "Android APK", "description": "Build a debug-signed Android APK with the Vaelis APK service: use an API key in the editor, or export HTML5 and upload it on the service website.", "lede": "Build a debug-signed Android APK with the Vaelis APK service: use an API key in the editor, or export HTML5 and upload it on the service website."} -->
+<div class="callout info"><strong>The APK service</strong><div>APKs are built by the Vaelis APK service at <a href="https://apk-builder--vaelis-server.replit.app/">https://apk-builder--vaelis-server.replit.app/</a>. The editor cannot compile APKs itself, and the client distribution contains no Android SDK or Gradle. The service is needed only while the APK is built; the finished APK runs on its own.</div></div>
+
+<h2 id="two-ways">Two ways to get your APK</h2>
+<h3>Option 1: use an API key in the editor</h3>
+<ol>
+<li>Get your API key for the APK service.</li>
+<li>In the editor open <strong>Export → Android APK</strong> and click <strong>+ Add build server</strong>.</li>
+<li>Enter a label (optional), the <strong>Server URL</strong> <code>https://apk-builder--vaelis-server.replit.app</code> and your <strong>API Key</strong>, then <strong>Add server</strong>.</li>
+<li>Click the <strong>Android APK</strong> card. The editor builds your game, uploads it, shows progress and downloads the APK when it is ready.</li>
+</ol>
+<h3>Option 2: no API key, export as HTML and upload on the website</h3>
+<ol>
+<li>In the editor choose <strong>Export</strong> and export as <strong>HTML5</strong> (PWA also works). A ZIP downloads.</li>
+<li>Open <a href="https://apk-builder--vaelis-server.replit.app/">https://apk-builder--vaelis-server.replit.app/</a> in your browser.</li>
+<li>Click <strong>Upload</strong> and choose the exported ZIP (the project export from step 1).</li>
+<li>When the build finishes, download your APK.</li>
+</ol>
+<div class="callout warn"><strong>Upload the exported game ZIP</strong><div>The ZIP must have <code>index.html</code> at its root. A saved project file (<code>.vs</code> from File → Save Project) is not an export and will not build.</div></div>
+
+<h2 id="status">Build behavior</h2>
+<ul>
+<li>The server badge shows whether the service is awake. A sleeping free-tier host wakes when you build; the first attempt can time out, so retry.</li>
+<li>Use <strong>Cancel build</strong> in the Export window to stop a running job. Do not restart or close the editor mid-build.</li>
+<li>The server keeps a finished APK for about 30 minutes; the editor tells it to delete its copy as soon as the download is complete.</li>
+<li>The APK is debug-signed, suitable for installing and testing directly on a device.</li>
+<li>The game loads from the APK itself in a local WebView origin, so ES modules, JSON, audio, images and the physics WASM work with no server or internet at runtime. Pointer Events are preferred with Touch Events as a fallback.</li>
+<li>The favicon you choose in the Export window becomes the launcher icon.</li>
+</ul>
+
+<h2 id="request-contract">Request contract (for people running a build server)</h2>
+<p>The editor sends exactly this request, with the export ZIP as the body:</p>
+<pre><code>POST /api/v1/build?name=&lt;url-encoded-game-title&gt;
+Content-Type: application/zip
+X-Api-Key: &lt;configured key&gt;</code></pre>
+<ul>
+<li>No other custom headers are sent; extra headers would fail the browser's CORS preflight. The server tells a standalone export apart by the ZIP contents (<code>index.html</code> at the root) and can read <code>manifest.webmanifest</code> and <code>sw.js</code> to tell PWA from plain HTML5.</li>
+<li>The response is a JSON job ticket with <code>statusUrl</code> (top level or under <code>job</code>). The completed status must provide <code>downloadUrl</code>. Relative URLs are resolved against the server URL.</li>
+<li><code>GET /api/healthz</code> (CORS-enabled JSON) powers the awake badge.</li>
+<li><code>DELETE &lt;cancelUrl&gt;</code> (from the ticket, falling back to <code>statusUrl</code>) cancels a job. It must be idempotent and the final status is <code>cancelled</code>, which the editor treats like <code>failed</code>. Status polling is also a heartbeat; a server should cancel jobs whose editor stops polling (about 60 seconds suggested).</li>
+<li>After a download the editor posts to the <code>/confirm-delivery</code> sibling of the download URL so the server can delete the APK early.</li>
+</ul>

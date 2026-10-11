@@ -30,14 +30,35 @@ FACTS = json.loads(Path(args.facts).read_text())
 CONTENT = HERE / 'content'
 
 # ------------------------------------------------------------------ navigation
+def easing_gallery():
+    data = json.loads((HERE / 'easings.json').read_text(encoding='utf-8'))['easings']
+    fam = [('Basic', ['linear','smoothstep','smootherstep'])]
+    for f in ['Quad','Cubic','Quart','Quint','Sine','Expo','Circ','Back','Elastic','Bounce']:
+        fam.append((f, ['easeIn'+f,'easeOut'+f,'easeInOut'+f]))
+    by = {e['label']: e for e in data}
+    out = []
+    for fname, names in fam:
+        cards = []
+        for n in names:
+            e = by[n]; lo = min(0.0, e['min']); hi = max(1.0, e['max']); span = (hi - lo) or 1
+            pts = e['samples']; n_ = len(pts) - 1
+            d = ' '.join(('M' if i == 0 else 'L') + f'{8 + 84*i/n_:.2f} {92 - 84*(v-lo)/span:.2f}' for i, v in enumerate(pts))
+            y0 = 92 - 84*(0-lo)/span; y1 = 92 - 84*(1-lo)/span
+            cards.append(f'<div class="easing-card"><svg viewBox="0 0 100 100" role="img" aria-label="{n} easing curve"><line class="g" x1="8" y1="{y0:.2f}" x2="92" y2="{y0:.2f}"/><line class="g" x1="8" y1="{y1:.2f}" x2="92" y2="{y1:.2f}"/><path d="{d}"/></svg><code>{n}</code></div>')
+        out.append(f'<h3 id="easing-{fname.lower()}">{fname}</h3><div class="easing-grid">{"".join(cards)}</div>')
+    names_tbl = '<div class="table-wrap"><table><thead><tr><th>Family</th><th>Names</th></tr></thead><tbody>' + ''.join(f'<tr><td>{f}</td><td>{", ".join("<code>"+n+"</code>" for n in ns)}</td></tr>' for f, ns in fam) + '</tbody></table></div>'
+    return names_tbl + ''.join(out)
+
+
+ARCHIVED = sorted(p.name[1:] for p in (HERE / 'archive').glob('v*')) if (HERE / 'archive').exists() else []
 NAV = [
- ('Get started', 'rocket', [('Overview','index'),('Installation','getting-started/installation'),('Build your first game','getting-started/first-game'),('Scripting quickstart','getting-started/scripting')]),
+ ('Get started', 'rocket', [('Overview','index'),('Installation','getting-started/installation'),('The Vaelis Hub','getting-started/hub'),('Build your first game','getting-started/first-game'),('Scripting quickstart','getting-started/scripting')]),
  ('Concepts', 'layers', [('Architecture','concepts/architecture'),('Entities & components','concepts/entities-components'),('Game loop & scenes','concepts/game-loop-scenes'),('Coordinate system','reference/coordinate-system')]),
- ('Editor', 'grid', [('Editor overview','editor/overview'),('Controls & exact locations','editor/controls'),('Hierarchy & Inspector','editor/hierarchy-inspector'),('Scenes & projects','editor/scenes-projects'),('Assets & animation','editor/assets-animation'),('Prefab workflow','editor/prefabs'),('Physics authoring','editor/physics'),('Navigation authoring','editor/navigation'),('Lighting, audio & UI','editor/lighting-audio-ui'),('Tilemaps & tilesets','editor/tilemaps'),('Component workflows','editor/component-workflows'),('Complete feature workflows','editor/complete-feature-workflows')]),
- ('Scripting', 'code', [('Lifecycle','scripting/lifecycle'),('Global API','scripting/globals'),('Entity context (this)','scripting/entity-context'),('Entity shortcuts','scripting/entity-shortcuts'),('Finding & spawning','scripting/finding-entities'),('Input','scripting/input'),('Physics scripting','scripting/physics'),('Collisions & triggers','scripting/collisions'),('Pathfinding','scripting/navigation'),('Navigation: complete setup','scripting/navigation-complete'),('State & messaging','scripting/state-messaging'),('Timers, state & messaging','scripting/timers-state'),('Persistence','scripting/persistence'),('Save data','scripting/saving'),('Errors & debugging','scripting/errors'),('API cookbook','scripting/api-cookbook')]),
+ ('Editor', 'grid', [('Editor overview','editor/overview'),('Controls & exact locations','editor/controls'),('Editor settings & performance','editor/settings'),('Hierarchy & Inspector','editor/hierarchy-inspector'),('Scenes & projects','editor/scenes-projects'),('Assets & animation','editor/assets-animation'),('Prefab workflow','editor/prefabs'),('Physics authoring','editor/physics'),('Navigation authoring','editor/navigation'),('Lighting, audio & UI','editor/lighting-audio-ui'),('Tilemaps & tilesets','editor/tilemaps'),('Component workflows','editor/component-workflows'),('Complete feature workflows','editor/complete-feature-workflows')]),
+ ('Scripting', 'code', [('Lifecycle','scripting/lifecycle'),('Global API','scripting/globals'),('Tween API','scripting/tween'),('Time scale & game speed','scripting/time-scale'),('Entity context (this)','scripting/entity-context'),('Entity shortcuts','scripting/entity-shortcuts'),('Finding & spawning','scripting/finding-entities'),('Input','scripting/input'),('Physics scripting','scripting/physics'),('Collisions & triggers','scripting/collisions'),('Pathfinding','scripting/navigation'),('Navigation: complete setup','scripting/navigation-complete'),('State & messaging','scripting/state-messaging'),('Timers, state & messaging','scripting/timers-state'),('Persistence','scripting/persistence'),('Save data','scripting/saving'),('Errors & debugging','scripting/errors'),('API cookbook','scripting/api-cookbook')]),
  ('API reference', 'braces', [('API index','api/index'),('Runtime modules','api/runtime'),('this (EntityContext)','api/this'),('Option schemas (opts)','api/options'),('Requirements & usage map','api/requirements')]),
- ('Export & deploy', 'package', [('Export overview','export/index'),('HTML5 & PWA','export/web'),('Android APK','export/android')]),
- ('Reference', 'book', [('Tuning guide','reference/tuning-guide'),('Scene JSON','reference/scene-format'),('Project format','reference/project-format'),('Engine conventions','reference/rules'),('Debugging','reference/debugging'),('Versioning','reference/versioning'),('Source map','reference/source-map'),('Changelog','reference/changelog')]),
+ ('Export & deploy', 'package', [('Export overview','export/index'),('HTML5 & PWA','export/web'),('Export window reference','export/export-window'),('Android APK','export/android')]),
+ ('Reference', 'book', [('Tuning guide','reference/tuning-guide'),('Scene JSON','reference/scene-format'),('Project format','reference/project-format'),('Engine conventions','reference/rules'),('Debugging','reference/debugging'),('Security & play origin','reference/security'),('Versioning','reference/versioning'),('Source map','reference/source-map'),('Changelog','reference/changelog')]),
  ('AI & machine access', 'bot', [('AI & crawlers','reference/ai-crawling'),('For AI assistants & LLMs','reference/llm-guide')]),
 ]
 COMPONENT_GROUPS = [
@@ -183,6 +204,7 @@ def write(rel_path, content):
 
 def render_doc(key, title, desc, lede, body_html, page_path, kind='Guide', jsonld_type='TechArticle', md_source=True):
     depth = len(Path(page_path).parts) - 1; root = '../' * depth
+    if '<!--EASINGS-->' in body_html: body_html = body_html.replace('<!--EASINGS-->', easing_gallery())
     body, heads = process(body_html, key, root)
     gname = group_of.get(key, ('Docs', title))[0]
     crumb, crumb_parts = crumbs_html(root, key, title)
@@ -262,8 +284,9 @@ def simple_page(page_path, title, desc, body, section='guides', layout='docs', e
 <div class="shell"><aside class="sidebar" id="sidebar" aria-label="Documentation navigation">{sidebar(root, '')}</aside><main id="main" class="main"><div class="doc-grid"><article class="doc">{body}{footer(root)}</article></div></main></div><script src="{root}assets/site.js" defer></script></body></html>''')
     write(page_path, html)
 
+OLD_ITEMS = ''.join(f'<div class="version-item"><div><strong>Vaelis {v}</strong> <span class="badge">Archived</span><div class="muted">Stable path <code>/docs/v{v}/</code> · kept unchanged</div></div><a class="button" href="v{v}/index.html">Open →</a></div>' for v in ARCHIVED)
 simple_page('docs/index.html', 'Choose a documentation version', 'Select the Vaelis engine version whose documentation you want to read.',
-  f'<div class="eyebrow">Versions</div><h1>Documentation versions</h1><p class="lede">Each engine version has its own permanent URL. Older versions are never overwritten.</p><div class="version-list"><div class="version-item"><div><strong>Vaelis {VERSION}</strong> <span class="badge">Current</span><div class="muted">Stable path <code>/docs/v{VERSION}/</code> · alias <code>/docs/latest/</code></div></div><a class="button" href="v{VERSION}/index.html">Open →</a></div></div>')
+  f'<div class="eyebrow">Versions</div><h1>Documentation versions</h1><p class="lede">Each engine version has its own permanent URL. Older versions are never overwritten.</p><div class="version-list"><div class="version-item"><div><strong>Vaelis {VERSION}</strong> <span class="badge">Current</span><div class="muted">Stable path <code>/docs/v{VERSION}/</code> · alias <code>/docs/latest/</code></div></div><a class="button" href="v{VERSION}/index.html">Open →</a></div>{OLD_ITEMS}</div>')
 write('docs/latest/index.html', f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=../v{VERSION}/index.html">{("<link rel=canonical href=" + ORIGIN + "/docs/v" + VERSION + "/index.html>") if ORIGIN else ""}<title>Vaelis documentation (latest)</title></head><body><p>Redirecting to <a href="../v{VERSION}/index.html">Vaelis {VERSION} documentation</a>…</p></body></html>')
 
 # html sitemap
@@ -272,7 +295,7 @@ for gname, gicon, items in NAV:
     sm += f'<div><h2>{escape(gname)}</h2><ul>' + ''.join(f'<li><a href="{url_of(k)}">{escape(t)}</a></li>' for t, k in items) + '</ul></div>'
 sm += '<div><h2>Components</h2><ul>' + ''.join(f'<li><a href="{V}/api/components/{c.lower()}.html">{c}</a></li>' for c in COMP_NAMES) + '</ul></div>'
 simple_page('sitemap.html', 'Site map', 'Every page in the Vaelis documentation.', f'<div class="eyebrow">Docs</div><h1>Site map</h1><p class="lede">All {len(PAGES)} documentation pages, grouped by section.</p><div class="sitemap-grid">{sm}</div>')
-write('404.html', head('', 'Page not found · ' + SITE, 'This page does not exist.', '404.html').replace('href="assets/', 'href="/assets/').replace('href="favicon', 'href="/favicon') + f'''\n<body data-layout="static"><div class="notfound"><h1>404</h1><p class="lede" style="margin:12px auto 24px">That page isn't part of the Vaelis documentation.</p><div class="btn-row" style="justify-content:center"><a class="btn primary" href="/index.html">Docs home</a><a class="btn" href="/sitemap.html">Site map</a></div></div></body></html>''')
+write('404.html', head('', 'Page not found · ' + SITE, 'This page does not exist.', '404.html').replace('<meta charset="utf-8">', '<meta charset="utf-8"><script>(function(){var p=location.pathname.split("/");var b=(/github\\.io$/.test(location.hostname)&&p[1])?"/"+p[1]+"/":"/";document.write("<base href=\\""+b+"\\">")})()</script>',1) + f'''\n<body data-layout="static"><div class="notfound"><h1>404</h1><p class="lede" style="margin:12px auto 24px">That page isn't part of the Vaelis documentation.</p><div class="btn-row" style="justify-content:center"><a class="btn primary" href="index.html">Docs home</a><a class="btn" href="sitemap.html">Site map</a></div></div></body></html>''')
 
 # ------------------------------------------------------------------ landing page
 def landing():
@@ -284,7 +307,8 @@ def landing():
              ('atom','Rapier2D physics','Dynamic, kinematic and static bodies, 16-layer filtering, joints and one-way platforms.',f'{V}/editor/physics.html'),
              ('route','Grid navigation','NavWorld2D bake &amp; paint, 16 areas with costs, NavAgent2D steering and avoidance.',f'{V}/scripting/navigation-complete.html'),
              ('lightning','2D lighting','Six light types, shadow casters and quad or raymarched shadows.',f'{V}/editor/lighting-audio-ui.html'),
-             ('package','Ship anywhere','HTML5, installable PWA, and Android APK through your own build server.',f'{V}/export/index.html')]
+             ('zap','Tween & time control','tween() with 33 easings, cancelTween(), and time.scale for slow motion or freeze.',f'{V}/scripting/tween.html'),
+             ('package','Ship anywhere','HTML5, installable PWA, and Android APK: use an API key, or export HTML and upload it on the APK service website.',f'{V}/export/android.html')]
     fh = ''.join(f'<a href="{u}"><span class="fi">{svg(i)}</span><h3>{t}</h3><p>{d}</p></a>' for i,t,d,u in feats)
     chips = ''.join(f'<a href="{V}/api/components/{c.lower()}.html">{c}</a>' for c in COMP_NAMES)
     hero_code = '''function onStart() {
@@ -353,7 +377,7 @@ for c in COMP_NAMES:
         'scriptMembers': [{'name': m, 'kind': ('method' if api['members'][m]['method'] else ('read-only property' if api['members'][m]['get'] and not api['members'][m]['set'] else 'property')), 'doc': first_line(api['members'][m]['doc'], 200)} for m in allowed if m in api['members']] if api else []}
 write(f'api/v{VERSION}/index.json', json.dumps(cat, indent=1, ensure_ascii=False))
 write(f'api/v{VERSION}/manifest.json', json.dumps({'title': f'Vaelis {VERSION} API catalog', 'engine': 'Vaelis', 'version': VERSION, 'files': {'catalog': f'api/v{VERSION}/index.json', 'searchIndex': 'search-index.json', 'llms': 'llms.txt', 'llmsFull': 'llms-full.txt'}, 'componentCount': len(COMP_NAMES), 'pageCount': len(RENDERED)}, indent=1))
-write('versions.json', json.dumps({'current': VERSION, 'versions': [{'version': VERSION, 'status': 'current', 'label': f'Vaelis {VERSION}', 'path': url_of('index')}]}, indent=1))
+write('versions.json', json.dumps({'current': VERSION, 'versions': [{'version': VERSION, 'status': 'current', 'label': f'Vaelis {VERSION}', 'path': url_of('index')}] + [{'version': v, 'status': 'archived', 'label': f'Vaelis {v}', 'path': f'docs/v{v}/index.html'} for v in ARCHIVED]}, indent=1))
 
 # sitemap + robots
 urls = sorted({r['url'] for r in RENDERED.values()} | {'index.html', 'docs/index.html', 'sitemap.html'})
@@ -366,4 +390,7 @@ write('robots.txt', 'User-agent: *\nAllow: /\n\n# AI search and training crawler
 write('.nojekyll', '')
 
 Path(HERE / 'build.log').write_text('\n'.join(log) + '\n')
+for v in ARCHIVED:
+    shutil.copytree(HERE / 'archive' / f'v{v}', OUT / 'docs' / f'v{v}', dirs_exist_ok=True)
+(OUT / '.nojekyll').write_text('')
 print(f'built {len(RENDERED)} pages -> {OUT}; {len(log)} source-driven corrections')

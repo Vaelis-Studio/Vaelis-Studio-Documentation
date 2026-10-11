@@ -1,0 +1,34 @@
+<!--meta {"title": "Security & play origin", "description": "Scripts are not sandboxed. How the separate play origin works, what the editor protects, and what stays exposed.", "lede": "Scripts are not sandboxed. How the separate play origin works, what the editor protects, and what stays exposed."} -->
+<div class="callout warn"><strong>Game scripts are not sandboxed</strong><div>A project's scripts are compiled with <code>new Function()</code> and run as normal page code. Whatever origin the game runs on is what the script can reach. Only open projects from people you trust.</div></div>
+
+<h2 id="play-origin">Recommended setup: play on a separate origin</h2>
+<ol>
+<li>Deploy the <strong>same folder</strong> on a second hostname, for example <code>play.yourdomain.com</code> (on Vercel, add another domain to the same project).</li>
+<li>In <code>project/editor/index.html</code> set <code>&lt;meta name="vaelis-play-origin" content="https://play.yourdomain.com" /&gt;</code>.</li>
+</ol>
+<p>Pressing Play then opens the game on the play origin and the editor sends the scene with <code>postMessage</code>. Scripts there cannot read the editor's <code>localStorage</code>, IndexedDB (saved projects, Android build server keys) or DOM, because browsers keep each origin's data apart.</p>
+<ul>
+<li><strong>Empty meta tag</strong> keeps same-origin play. Fine for a private, local setup; not fine once you share projects.</li>
+<li><strong>Offline:</strong> the other host cannot be reached, so the editor falls back to same-origin play and logs a warning.</li>
+<li><strong><code>save</code> data</strong> from Play lives on the play origin, separate from the editor's.</li>
+<li>Use <code>https://</code> in production and put nothing private (login cookies, editor data) on the play origin.</li>
+</ul>
+
+<h2 id="protections">What is protected</h2>
+<ul>
+<li><strong>Message handling:</strong> the editor accepts messages only from the play window it opened, on the origin it opened it on. The play window accepts messages only from the editor.</li>
+<li><strong>Escaped Console:</strong> script output is escaped, so <code>console.log("&lt;img onerror=...&gt;")</code> cannot run code in the editor.</li>
+<li><strong>Escaped project data:</strong> entity, script, tag and asset names come from project files and are escaped in the Hierarchy, Inspector, dropdowns and asset grid.</li>
+<li><strong>Shadowed globals:</strong> inside a script, <code>window</code>, <code>document</code>, <code>globalThis</code>, <code>self</code>, <code>top</code>, <code>parent</code>, <code>frames</code>, <code>opener</code>, <code>open</code>, <code>localStorage</code>, <code>sessionStorage</code>, <code>indexedDB</code>, <code>caches</code>, <code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code> and <code>Function</code> are <code>undefined</code>. This stops accidents and one-line snooping only; the separate origin is the real protection. Use <code>save</code> and <code>global</code> instead of browser storage.</li>
+<li><strong>Import prompt:</strong> loading a project that contains scripts asks for confirmation first.</li>
+<li><strong>No secrets shipped:</strong> Android build server URLs and API keys are typed by the user and stored only in that browser's <code>localStorage</code>.</li>
+</ul>
+
+<h2 id="still-exposed">What is still exposed</h2>
+<ul>
+<li>In same-origin mode, everything a page on that origin can reach, including saved projects and build keys.</li>
+<li>A script can still make network requests from the play origin and affect its own game window. That is the nature of running someone's code.</li>
+</ul>
+
+<h2 id="licenses">Third-party licenses</h2>
+<p>Vaelis bundles open-source libraries; see <code>THIRD_PARTY_LICENSES.md</code> in the distribution. Exported games include <code>THIRD_PARTY_LICENSES.txt</code>. Keep it in the folder when you publish.</p>

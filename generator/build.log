@@ -16,6 +16,19 @@ api/components/charactercontroller: CharacterController.requestDriveTowardY adde
 api/components/charactercontroller: CharacterController.requestFlip added
 api/components/charactercontroller: CharacterController script API + driveTowardArriveDistance
 api/components/collider2d: Collider2D.trianglePoints default → [{x:-0.5,y:0.5}, {x:0.5,y:0.5}, {x:0,y:-0.5}]
+api/components/joint2d: Joint2D.damping default → 18
+api/components/joint2d: Joint2D.flexibility added
+api/components/joint2d: Joint2D.jointDrag added
+api/components/joint2d: Joint2D.restStiffness added
+api/components/joint2d: Joint2D.breakable added
+api/components/joint2d: Joint2D.breakForce added
+api/components/joint2d: Joint2D.disableConnectedCollision added
+api/components/joint2d: Joint2D.collideConnected default → undefined
+api/components/joint2d: Joint2D script API + breakForce
+api/components/joint2d: Joint2D script API + breakable
+api/components/joint2d: Joint2D script API + disableConnectedCollision
+api/components/joint2d: Joint2D script API + jointDrag
+api/components/joint2d: Joint2D script API + restStiffness
 api/components/joystick: Joystick.x added
 api/components/joystick: Joystick.y added
 api/components/joystick: Joystick.magnitude added
@@ -33,6 +46,8 @@ api/components/joystick: Joystick script API + outlineColor
 api/components/joystick: Joystick script API + outlineWidth
 api/components/navagent2d: NavAgent2D.currentPath added
 api/components/navagent2d: NavAgent2D.currentPathIndex added
+api/components/rigidbody2d: Rigidbody2D.autoMass added
+api/components/rigidbody2d: Rigidbody2D.angularDamping default → 0
 api/components/rigidbody2d: Rigidbody2D.driveVelocityX added
 api/components/rigidbody2d: Rigidbody2D.driveVelocityY added
 api/components/rigidbody2d: Rigidbody2D.driveAngularVelocity added
@@ -45,6 +60,7 @@ api/components/rigidbody2d: Rigidbody2D.pendingImpulseX added
 api/components/rigidbody2d: Rigidbody2D.pendingImpulseY added
 api/components/rigidbody2d: Rigidbody2D.pendingTorque added
 api/components/rigidbody2d: Rigidbody2D.pendingAngularImpulse added
+api/components/rigidbody2d: Rigidbody2D script API + addForceAtPoint(…)
 api/components/rigidbody2d: Rigidbody2D script API + groundAngleLimit
 api/components/rigidbody2d: Rigidbody2D script API + grounded
 api/components/rigidbody2d: Rigidbody2D script API + slopeMinAngle
@@ -66,7 +82,5 @@ api/components/textinput: TextInput.focused added
 api/components/textinput: TextInput.justSubmitted added
 api/components/transform: Transform script API + scale
 concepts/architecture: text fix 'standalone runtime directory/'
-export/android: text fix 'X-Vaelis-Standalone-Export'
-export/android: text fix 'X-Vaelis-Export-Format'
 reference/project-format: text fix 'standalone runtime directory/'
 reference/source-map: text fix 'phyg-updated.zip'

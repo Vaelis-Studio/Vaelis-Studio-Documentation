@@ -11,8 +11,6 @@ API_MODULE = {'Transform':'TransformAPI','SpriteRenderer':'SpriteAPI','ShapeRend
  'Light':'LightAPI','ShadowCaster':'ShadowCasterAPI','LightingSettings':'LightingSettingsAPI','NavAgent2D':'NavAgentAPI'}
 
 TEXT_FIXES = [
- ('X-Vaelis-Standalone-Export', 'X-ZenEngine-Standalone-Export'),
- ('X-Vaelis-Export-Format', 'X-ZenEngine-Export-Format'),
  ('phyg-updated.zip', 'the Vaelis client distribution'),
  ('standalone runtime directory/', '<code>project/player/</code>'),
  ('standalone runtime directory', '<code>project/player/</code>'),
